@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.34031.81
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DistractScript", "DistractScript\DistractScript.csproj", "{6E465ABC-B0D4-48CA-A299-B91B2804D115}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6E465ABC-B0D4-48CA-A299-B91B2804D115}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6E465ABC-B0D4-48CA-A299-B91B2804D115}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6E465ABC-B0D4-48CA-A299-B91B2804D115}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6E465ABC-B0D4-48CA-A299-B91B2804D115}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {0B5E1716-208C-49B1-B304-E5D433AB98D0}
+	EndGlobalSection
+EndGlobal
