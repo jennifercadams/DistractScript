@@ -15,6 +15,7 @@ namespace DistractScript
             {
                 var fileName = ParseArgs(args);
                 var text = GetFileText(fileName);
+                var tokens = Tokenizer.Split(text);
 
             }
             catch (Exception exception)
