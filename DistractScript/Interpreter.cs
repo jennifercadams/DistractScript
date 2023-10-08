@@ -1,5 +1,8 @@
 ﻿using System;
 using System.Diagnostics;
+using System.IO;
+using System.Reflection;
+using System.Text.RegularExpressions;
 using DistractScript.Exceptions;
 
 namespace DistractScript
@@ -10,15 +13,17 @@ namespace DistractScript
         {
             try
             {
-                ValidateArgs(args);
+                var fileName = ParseArgs(args);
+                var text = GetFileText(fileName);
+
             }
             catch (Exception exception)
             {
-                ProcessException(exception);
+                HandleException(exception);
             }
         }
 
-        private static void ValidateArgs(string[] args)
+        private static string ParseArgs(string[] args)
         {
             if (args.Length == 0)
             {
@@ -28,9 +33,30 @@ namespace DistractScript
             {
                 throw new TooManyArgumentsException();
             }
+
+            var fileName = args[0];
+            var fileNamePattern = @"^.+\.adhd$";
+            if (!Regex.IsMatch(fileName, fileNamePattern))
+            {
+                throw new FileFormatException();
+            }
+
+            return fileName;
         }
 
-        private static void ProcessException(Exception exception)
+        private static string GetFileText(string fileName)
+        {
+            var directory = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+            var filePath = $"{directory}\\{fileName}";
+            if (!File.Exists(filePath))
+            {
+                throw new FileNotFoundException(Resources.ErrorMessages.FileNotFound);
+            }
+
+            return File.ReadAllText(filePath);
+        }
+
+        private static void HandleException(Exception exception)
         {
             Console.WriteLine(exception.Message);
             Debug.WriteLine(exception.ToString());
