@@ -46,14 +46,14 @@
     <Compile Include="Exceptions\FileFormatException.cs" />
     <Compile Include="Exceptions\MissingFileNameException.cs" />
     <Compile Include="Exceptions\TooManyArgumentsException.cs" />
-    <Compile Include="Interpreter.cs" />
+    <Compile Include="Core\Interpreter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Resources\ErrorMessages.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>ErrorMessages.resx</DependentUpon>
     </Compile>
-    <Compile Include="Tokenizer.cs" />
+    <Compile Include="Core\Tokenizer.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

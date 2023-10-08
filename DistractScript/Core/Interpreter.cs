@@ -5,7 +5,7 @@ using System.Reflection;
 using System.Text.RegularExpressions;
 using DistractScript.Exceptions;
 
-namespace DistractScript
+namespace DistractScript.Core
 {
     public static class Interpreter
     {

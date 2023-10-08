@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace DistractScript
+namespace DistractScript.Core
 {
     public static class Tokenizer
     {
