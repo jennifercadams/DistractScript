@@ -43,6 +43,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Exceptions\FileFormatException.cs" />
+    <Compile Include="Exceptions\MissingFileNameException.cs" />
+    <Compile Include="Exceptions\TooManyArgumentsException.cs" />
     <Compile Include="Interpreter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Resources\ErrorMessages.Designer.cs">

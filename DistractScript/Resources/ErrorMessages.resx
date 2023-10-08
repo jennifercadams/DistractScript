@@ -123,10 +123,10 @@
   <data name="IncorrectFileFormat" xml:space="preserve">
     <value>Incorrect file format. DistractScript expects text files with the extension \".adhd\".</value>
   </data>
-  <data name="MissingFilename" xml:space="preserve">
+  <data name="MissingFileName" xml:space="preserve">
     <value>You forgot the filename. It's okay, DistractScript forgets things, too.</value>
   </data>
-  <data name="TooManyFilenames" xml:space="preserve">
+  <data name="TooManyArguments" xml:space="preserve">
     <value>Sorry, DistractScript can't multitask. Enter exactly one filename.</value>
   </data>
 </root>

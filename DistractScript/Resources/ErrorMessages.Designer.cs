@@ -81,18 +81,18 @@ namespace DistractScript.Resources {
         /// <summary>
         ///   Looks up a localized string similar to You forgot the filename. It&apos;s okay, DistractScript forgets things, too..
         /// </summary>
-        internal static string MissingFilename {
+        internal static string MissingFileName {
             get {
-                return ResourceManager.GetString("MissingFilename", resourceCulture);
+                return ResourceManager.GetString("MissingFileName", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Sorry, DistractScript can&apos;t multitask. Enter exactly one filename..
         /// </summary>
-        internal static string TooManyFilenames {
+        internal static string TooManyArguments {
             get {
-                return ResourceManager.GetString("TooManyFilenames", resourceCulture);
+                return ResourceManager.GetString("TooManyArguments", resourceCulture);
             }
         }
     }

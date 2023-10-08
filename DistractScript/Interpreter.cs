@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
+using DistractScript.Exceptions;
 
 namespace DistractScript
 {
@@ -21,11 +22,11 @@ namespace DistractScript
         {
             if (args.Length == 0)
             {
-                throw new Exception(Resources.ErrorMessages.MissingFilename);
+                throw new MissingFileNameException();
             }
             else if (args.Length > 1)
             {
-                throw new Exception(Resources.ErrorMessages.TooManyFilenames);
+                throw new TooManyArgumentsException();
             }
         }
 
