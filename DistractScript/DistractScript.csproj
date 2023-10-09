@@ -54,6 +54,7 @@
       <DependentUpon>ErrorMessages.resx</DependentUpon>
     </Compile>
     <Compile Include="Core\Tokenizer.cs" />
+    <Compile Include="Tokens\Token.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
