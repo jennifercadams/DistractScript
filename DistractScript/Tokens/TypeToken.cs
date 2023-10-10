@@ -1,4 +1,5 @@
 ﻿using System;
+using DistractScript.TokenCollections;
 
 namespace DistractScript.Tokens
 {
@@ -10,7 +11,7 @@ namespace DistractScript.Tokens
         DecimalType
     }
 
-    class TypeToken : Token
+    public class TypeToken : Token
     {
         public CustomType Type { get; private set; }
 
@@ -19,16 +20,16 @@ namespace DistractScript.Tokens
         {
             switch (value)
             {
-                case "infodump":
+                case TypeCollection.StringType:
                     Type = CustomType.StringType;
                     break;
-                case "george":
+                case TypeCollection.BoolType:
                     Type = CustomType.BoolType;
                     break;
-                case "round":
+                case TypeCollection.IntType:
                     Type = CustomType.IntType;
                     break;
-                case "pointy":
+                case TypeCollection.DecimalType:
                     Type = CustomType.DecimalType;
                     break;
             }

@@ -2,13 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using DistractScript.Tokens;
+using DistractScript.TokenCollections;
 
 namespace DistractScript.Core
 {
     public static class Tokenizer
     {
-        public static string[] Types = { "infodump", "george", "round", "pointy" };
-
         public static List<Token> GenerateTokens(string text)
         {
             var splitText = text.Split((char[])null, StringSplitOptions.RemoveEmptyEntries).ToList();
@@ -16,7 +15,7 @@ namespace DistractScript.Core
 
             foreach (var substring in splitText)
             {
-                if (Types.Contains(substring))
+                if (TypeCollection.Contains(substring))
                 {
                     var token = new TypeToken(substring);
                     tokens.Add(token);
