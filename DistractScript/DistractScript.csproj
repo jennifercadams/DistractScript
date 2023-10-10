@@ -54,8 +54,10 @@
       <DependentUpon>ErrorMessages.resx</DependentUpon>
     </Compile>
     <Compile Include="Core\Tokenizer.cs" />
+    <Compile Include="TokenCollections\KeywordCollection.cs" />
     <Compile Include="TokenCollections\TokenCollection.cs" />
     <Compile Include="TokenCollections\TypeCollection.cs" />
+    <Compile Include="Tokens\KeywordToken.cs" />
     <Compile Include="Tokens\Token.cs" />
     <Compile Include="Tokens\TypeToken.cs" />
   </ItemGroup>

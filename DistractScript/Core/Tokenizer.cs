@@ -15,6 +15,11 @@ namespace DistractScript.Core
 
             foreach (var substring in splitText)
             {
+                if (KeywordCollection.Contains(substring))
+                {
+                    var token = new KeywordToken(substring);
+                    tokens.Add(token);
+                }
                 if (TypeCollection.Contains(substring))
                 {
                     var token = new TypeToken(substring);
