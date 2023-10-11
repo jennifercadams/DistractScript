@@ -8,7 +8,7 @@ namespace DistractScript.Tokens
         DeclareVar
     }
 
-    class KeywordToken : Token
+    public class KeywordToken : Token
     {
         public Keyword Keyword { get; private set; }
 
