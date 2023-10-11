@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using DistractScript.Tokens;
-using DistractScript.TokenCollections;
+using DistractScript.Collections.TokenCollections;
 
 namespace DistractScript.Core
 {

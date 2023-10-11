@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace DistractScript.TokenCollections
+namespace DistractScript.Collections.TokenCollections
 {
     public class TypeCollection : TokenCollection<TypeCollection>
     {
