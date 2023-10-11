@@ -3,17 +3,9 @@ using DistractScript.Collections.TokenCollections;
 
 namespace DistractScript.Tokens
 {
-    public enum CustomType
-    {
-        StringType,
-        BoolType,
-        IntType,
-        DecimalType
-    }
-
     public class TypeToken : Token
     {
-        public CustomType Type { get; private set; }
+        public Type Type { get; private set; }
 
         public TypeToken(string value)
             : base(value)
@@ -21,16 +13,16 @@ namespace DistractScript.Tokens
             switch (value)
             {
                 case TypeCollection.StringType:
-                    Type = CustomType.StringType;
+                    Type = typeof(string);
                     break;
                 case TypeCollection.BoolType:
-                    Type = CustomType.BoolType;
+                    Type = typeof(bool);
                     break;
                 case TypeCollection.IntType:
-                    Type = CustomType.IntType;
+                    Type = typeof(int);
                     break;
                 case TypeCollection.DecimalType:
-                    Type = CustomType.DecimalType;
+                    Type = typeof(decimal);
                     break;
             }
         }
