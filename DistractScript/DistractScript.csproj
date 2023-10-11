@@ -43,6 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Collections\TokenCollections\OperatorCollection.cs" />
     <Compile Include="Exceptions\FileFormatException.cs" />
     <Compile Include="Exceptions\MissingFileNameException.cs" />
     <Compile Include="Exceptions\TooManyArgumentsException.cs" />
@@ -58,6 +59,7 @@
     <Compile Include="Collections\TokenCollections\TokenCollection.cs" />
     <Compile Include="Collections\TokenCollections\TypeCollection.cs" />
     <Compile Include="Tokens\KeywordToken.cs" />
+    <Compile Include="Tokens\OperatorToken.cs" />
     <Compile Include="Tokens\Token.cs" />
     <Compile Include="Tokens\TypeToken.cs" />
     <Compile Include="Tokens\VariableName.cs" />

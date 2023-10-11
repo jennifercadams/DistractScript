@@ -20,6 +20,11 @@ namespace DistractScript.Core
                     var token = new KeywordToken(substring);
                     tokens.Add(token);
                 }
+                else if (OperatorCollection.Contains(substring))
+                {
+                    var token = new OperatorToken(substring);
+                    tokens.Add(token);
+                }
                 else if (TypeCollection.Contains(substring))
                 {
                     var token = new TypeToken(substring);
