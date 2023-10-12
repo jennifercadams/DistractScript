@@ -60,6 +60,7 @@
     <Compile Include="Collections\TokenCollections\TypeCollection.cs" />
     <Compile Include="Tokens\KeywordToken.cs" />
     <Compile Include="Tokens\OperatorToken.cs" />
+    <Compile Include="Tokens\StringLiteral.cs" />
     <Compile Include="Tokens\Token.cs" />
     <Compile Include="Tokens\TypeToken.cs" />
     <Compile Include="Tokens\VariableName.cs" />
