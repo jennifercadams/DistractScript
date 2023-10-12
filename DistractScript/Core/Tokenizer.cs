@@ -50,6 +50,11 @@ namespace DistractScript.Core
                     var token = new DecimalLiteral(substring);
                     tokens.Add(token);
                 }
+                else if (substring == ";")
+                {
+                    var token = new SeparatorToken(substring);
+                    tokens.Add(token);
+                }
                 else
                 {
                     var token = new VariableName(substring);
