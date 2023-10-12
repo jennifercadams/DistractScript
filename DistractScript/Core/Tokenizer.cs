@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using DistractScript.Tokens;
 using DistractScript.Collections.TokenCollections;
+using System.Text.RegularExpressions;
 
 namespace DistractScript.Core
 {
@@ -37,6 +38,11 @@ namespace DistractScript.Core
                 else if (substring == "true" || substring == "false")
                 {
                     var token = new BoolLiteral(substring);
+                    tokens.Add(token);
+                }
+                else if (IsInteger(substring))
+                {
+                    var token = new IntegerLiteral(substring);
                     tokens.Add(token);
                 }
                 else
@@ -90,6 +96,12 @@ namespace DistractScript.Core
             }
 
             return splitText;
+        }
+
+        private static bool IsInteger(string stringValue)
+        {
+            var integerPattern = @"^\d+$";
+            return Regex.IsMatch(stringValue, integerPattern);
         }
     }
 }

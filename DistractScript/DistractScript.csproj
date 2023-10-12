@@ -59,6 +59,7 @@
     <Compile Include="Collections\TokenCollections\TokenCollection.cs" />
     <Compile Include="Collections\TokenCollections\TypeCollection.cs" />
     <Compile Include="Tokens\BoolLiteral.cs" />
+    <Compile Include="Tokens\IntegerLiteral.cs" />
     <Compile Include="Tokens\KeywordToken.cs" />
     <Compile Include="Tokens\OperatorToken.cs" />
     <Compile Include="Tokens\StringLiteral.cs" />
