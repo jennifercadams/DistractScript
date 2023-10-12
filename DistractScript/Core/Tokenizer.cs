@@ -73,21 +73,15 @@ namespace DistractScript.Core
             for (var i = 0; i < text.Length; i++)
             {
                 char c = text[i];
-                if (c == '\n' || c == ';')
+                if (c == '\n')
                 {
-                    if (token != "")
-                    {
-                        splitText.Add(token);
-                        token = "";
-                    }
-                    splitText.Add(c.ToString());
+                    token += c;
+                    splitText.Add(token);
+                    token = "";
                 }
-                else if (char.IsWhiteSpace(c) && token == "")
+                else if (char.IsWhiteSpace(c) && (i == text.Length - 1 || !char.IsWhiteSpace(text[i + 1])))
                 {
-                    continue;
-                }
-                else if (char.IsWhiteSpace(c) && token != "")
-                {
+                    token += c;
                     splitText.Add(token);
                     token = "";
                 }
@@ -98,6 +92,14 @@ namespace DistractScript.Core
                     splitText.Add(stringLiteral);
                     i = endIndex;
                     token = "";
+                }
+                else if (c == ';')
+                {
+                    if (token != "")
+                    {
+                        splitText.Add(token);
+                    }
+                    token = c.ToString();
                 }
                 else
                 {
