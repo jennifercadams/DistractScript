@@ -7,8 +7,8 @@ namespace DistractScript.Tokens
     {
         public Type Type { get; private set; }
 
-        public TypeToken(string value)
-            : base(value)
+        public TypeToken(string value, int line)
+            : base(value, line)
         {
             switch (value)
             {

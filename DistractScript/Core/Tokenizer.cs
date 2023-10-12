@@ -12,52 +12,57 @@ namespace DistractScript.Core
         {
             var splitText = Split(text);
             var tokens = new List<Token>();
+            var line = 1;
 
             foreach (var substring in splitText)
             {
-                if (KeywordCollection.Contains(substring))
+                if (substring == "\n")
                 {
-                    var token = new KeywordToken(substring);
+                    line++;
+                }
+                else if (KeywordCollection.Contains(substring))
+                {
+                    var token = new KeywordToken(substring, line);
                     tokens.Add(token);
                 }
                 else if (OperatorCollection.Contains(substring))
                 {
-                    var token = new OperatorToken(substring);
+                    var token = new OperatorToken(substring, line);
                     tokens.Add(token);
                 }
                 else if (TypeCollection.Contains(substring))
                 {
-                    var token = new TypeToken(substring);
+                    var token = new TypeToken(substring, line);
                     tokens.Add(token);
                 }
                 else if (substring[0] == '"')
                 {
-                    var token = new StringLiteral(substring);
+                    var token = new StringLiteral(substring, line);
                     tokens.Add(token);
                 }
                 else if (substring == "true" || substring == "false")
                 {
-                    var token = new BoolLiteral(substring);
+                    var token = new BoolLiteral(substring, line);
                     tokens.Add(token);
                 }
                 else if (IsInteger(substring))
                 {
-                    var token = new IntegerLiteral(substring);
+                    var token = new IntegerLiteral(substring, line);
                     tokens.Add(token);
                 }
                 else if (IsDecimal(substring))
                 {
-                    var token = new DecimalLiteral(substring);
+                    var token = new DecimalLiteral(substring, line);
                     tokens.Add(token);
                 }
                 else if (substring == ";")
                 {
-                    var token = new SeparatorToken(substring);
+                    var token = new SeparatorToken(substring, line);
                     tokens.Add(token);
                 }
                 else
                 {
-                    var token = new VariableName(substring);
+                    var token = new VariableName(substring, line);
                     tokens.Add(token);
                 }
             }
@@ -73,7 +78,16 @@ namespace DistractScript.Core
             for (var i = 0; i < text.Length; i++)
             {
                 char c = text[i];
-                if (char.IsWhiteSpace(c) && token == "")
+                if (c == '\n' || c == ';')
+                {
+                    if (token != "")
+                    {
+                        splitText.Add(token);
+                        token = "";
+                    }
+                    splitText.Add(c.ToString());
+                }
+                else if (char.IsWhiteSpace(c) && token == "")
                 {
                     continue;
                 }
@@ -89,15 +103,6 @@ namespace DistractScript.Core
                     splitText.Add(stringLiteral);
                     i = endIndex;
                     token = "";
-                }
-                else if (c == ';')
-                {
-                    if (token != "")
-                    {
-                        splitText.Add(token);
-                        token = "";
-                    }
-                    splitText.Add(c.ToString());
                 }
                 else
                 {

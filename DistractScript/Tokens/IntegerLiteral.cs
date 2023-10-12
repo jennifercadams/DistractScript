@@ -6,8 +6,8 @@ namespace DistractScript.Tokens
     {
         public int Value { get; private set; }
 
-        public IntegerLiteral(string value)
-            : base(value)
+        public IntegerLiteral(string value, int line)
+            : base(value, line)
         {
             Value = Convert.ToInt32(value);
         }

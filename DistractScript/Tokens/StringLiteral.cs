@@ -4,7 +4,7 @@ namespace DistractScript.Tokens
 {
     public class StringLiteral : Token
     {
-        public StringLiteral(string value)
-            : base(value) { }
+        public StringLiteral(string value, int line)
+            : base(value, line) { }
     }
 }

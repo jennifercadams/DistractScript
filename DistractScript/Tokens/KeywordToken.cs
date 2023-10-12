@@ -12,8 +12,8 @@ namespace DistractScript.Tokens
     {
         public Keyword Keyword { get; private set; }
 
-        public KeywordToken(string value)
-            : base(value)
+        public KeywordToken(string value, int line)
+            : base(value, line)
         {
             switch (value)
             {
