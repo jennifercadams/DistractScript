@@ -19,52 +19,47 @@ namespace DistractScript.Core
                 if (substring == "\n")
                 {
                     line++;
+                    continue;
                 }
-                else if (KeywordCollection.Contains(substring))
+
+                Token token;
+                if (KeywordCollection.Contains(substring))
                 {
-                    var token = new KeywordToken(substring, line);
-                    tokens.Add(token);
+                    token = new KeywordToken(substring, line);
                 }
                 else if (OperatorCollection.Contains(substring))
                 {
-                    var token = new OperatorToken(substring, line);
-                    tokens.Add(token);
+                    token = new OperatorToken(substring, line);
                 }
                 else if (TypeCollection.Contains(substring))
                 {
-                    var token = new TypeToken(substring, line);
-                    tokens.Add(token);
+                    token = new TypeToken(substring, line);
                 }
                 else if (substring[0] == '"')
                 {
-                    var token = new StringLiteral(substring, line);
-                    tokens.Add(token);
+                    token = new StringLiteral(substring, line);
                 }
                 else if (substring == "true" || substring == "false")
                 {
-                    var token = new BoolLiteral(substring, line);
-                    tokens.Add(token);
+                    token = new BoolLiteral(substring, line);
                 }
                 else if (IsInteger(substring))
                 {
-                    var token = new IntegerLiteral(substring, line);
-                    tokens.Add(token);
+                    token = new IntegerLiteral(substring, line);
                 }
                 else if (IsDecimal(substring))
                 {
-                    var token = new DecimalLiteral(substring, line);
-                    tokens.Add(token);
+                    token = new DecimalLiteral(substring, line);
                 }
                 else if (substring == ";")
                 {
-                    var token = new SeparatorToken(substring, line);
-                    tokens.Add(token);
+                    token = new SeparatorToken(substring, line);
                 }
                 else
                 {
-                    var token = new VariableName(substring, line);
-                    tokens.Add(token);
+                    token = new VariableName(substring, line);
                 }
+                tokens.Add(token);
             }
 
             return tokens;
