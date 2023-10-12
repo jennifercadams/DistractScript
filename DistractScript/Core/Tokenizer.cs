@@ -34,6 +34,11 @@ namespace DistractScript.Core
                     var token = new StringLiteral(substring);
                     tokens.Add(token);
                 }
+                else if (substring == "true" || substring == "false")
+                {
+                    var token = new BoolLiteral(substring);
+                    tokens.Add(token);
+                }
                 else
                 {
                     var token = new VariableName(substring);
