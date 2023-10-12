@@ -12,8 +12,8 @@ namespace DistractScript.Tokens
     {
         public Operator Operator { get; private set; }
 
-        public OperatorToken(string value, int line)
-            : base(value, line)
+        public OperatorToken(string value, int line, int column)
+            : base(value, line, column)
         {
             switch (value)
             {

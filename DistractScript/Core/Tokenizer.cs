@@ -13,53 +13,57 @@ namespace DistractScript.Core
             var splitText = Split(text);
             var tokens = new List<Token>();
             var line = 1;
+            var column = 0;
 
             foreach (var substring in splitText)
             {
-                if (substring == "\n")
-                {
-                    line++;
-                    continue;
-                }
+                var tokenString = substring.Trim();
 
                 Token token;
-                if (KeywordCollection.Contains(substring))
+                if (KeywordCollection.Contains(tokenString))
                 {
-                    token = new KeywordToken(substring, line);
+                    token = new KeywordToken(tokenString, line, column);
                 }
-                else if (OperatorCollection.Contains(substring))
+                else if (OperatorCollection.Contains(tokenString))
                 {
-                    token = new OperatorToken(substring, line);
+                    token = new OperatorToken(tokenString, line, column);
                 }
-                else if (TypeCollection.Contains(substring))
+                else if (TypeCollection.Contains(tokenString))
                 {
-                    token = new TypeToken(substring, line);
+                    token = new TypeToken(tokenString, line, column);
                 }
-                else if (substring[0] == '"')
+                else if (tokenString[0] == '"')
                 {
-                    token = new StringLiteral(substring, line);
+                    token = new StringLiteral(tokenString, line, column);
                 }
-                else if (substring == "true" || substring == "false")
+                else if (tokenString == "true" || tokenString == "false")
                 {
-                    token = new BoolLiteral(substring, line);
+                    token = new BoolLiteral(tokenString, line, column);
                 }
-                else if (IsInteger(substring))
+                else if (IsInteger(tokenString))
                 {
-                    token = new IntegerLiteral(substring, line);
+                    token = new IntegerLiteral(tokenString, line, column);
                 }
-                else if (IsDecimal(substring))
+                else if (IsDecimal(tokenString))
                 {
-                    token = new DecimalLiteral(substring, line);
+                    token = new DecimalLiteral(tokenString, line, column);
                 }
-                else if (substring == ";")
+                else if (tokenString == ";")
                 {
-                    token = new SeparatorToken(substring, line);
+                    token = new SeparatorToken(tokenString, line, column);
                 }
                 else
                 {
-                    token = new VariableName(substring, line);
+                    token = new VariableName(tokenString, line, column);
                 }
                 tokens.Add(token);
+
+                column += substring.Length;
+                if (substring.Contains("\n"))
+                {
+                    column = 0;
+                    line++;
+                }
             }
 
             return tokens;

@@ -6,8 +6,8 @@ namespace DistractScript.Tokens
     {
         public bool Value { get; private set; }
 
-        public BoolLiteral(string value, int line)
-            : base(value, line)
+        public BoolLiteral(string value, int line, int column)
+            : base(value, line, column)
         {
             Value = Convert.ToBoolean(value);
         }
