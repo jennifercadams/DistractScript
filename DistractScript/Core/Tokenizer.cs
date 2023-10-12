@@ -45,6 +45,11 @@ namespace DistractScript.Core
                     var token = new IntegerLiteral(substring);
                     tokens.Add(token);
                 }
+                else if (IsDecimal(substring))
+                {
+                    var token = new DecimalLiteral(substring);
+                    tokens.Add(token);
+                }
                 else
                 {
                     var token = new VariableName(substring);
@@ -102,6 +107,12 @@ namespace DistractScript.Core
         {
             var integerPattern = @"^\d+$";
             return Regex.IsMatch(stringValue, integerPattern);
+        }
+
+        private static bool IsDecimal(string stringValue)
+        {
+            var decimalPattern = @"^\d+\.\d+$";
+            return Regex.IsMatch(stringValue, decimalPattern);
         }
     }
 }
