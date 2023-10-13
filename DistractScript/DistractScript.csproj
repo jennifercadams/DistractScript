@@ -44,6 +44,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Collections\TokenCollections\OperatorCollection.cs" />
+    <Compile Include="Core\Parser.cs" />
+    <Compile Include="Data\BlockNode.cs" />
+    <Compile Include="Data\ParseTree.cs" />
+    <Compile Include="Data\TokenNode.cs" />
+    <Compile Include="Data\TreeNode.cs" />
     <Compile Include="Exceptions\FileFormatException.cs" />
     <Compile Include="Exceptions\MissingFileNameException.cs" />
     <Compile Include="Exceptions\TooManyArgumentsException.cs" />
