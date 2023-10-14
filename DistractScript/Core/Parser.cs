@@ -51,6 +51,8 @@ namespace DistractScript.Core
                 }
             }
 
+            block.SetCommand();
+
             return block;
         }
     }
