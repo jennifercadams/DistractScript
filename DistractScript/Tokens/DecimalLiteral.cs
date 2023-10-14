@@ -9,6 +9,7 @@ namespace DistractScript.Tokens
         public DecimalLiteral(string value, int line, int column)
             : base(value, line, column)
         {
+            Type = typeof(decimal);
             Value = Convert.ToDecimal(value);
         }
     }

@@ -9,6 +9,7 @@ namespace DistractScript.Tokens
         public IntegerLiteral(string value, int line, int column)
             : base(value, line, column)
         {
+            Type = typeof(int);
             Value = Convert.ToInt32(value);
         }
     }

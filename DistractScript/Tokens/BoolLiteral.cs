@@ -9,6 +9,7 @@ namespace DistractScript.Tokens
         public BoolLiteral(string value, int line, int column)
             : base(value, line, column)
         {
+            Type = typeof(bool);
             Value = Convert.ToBoolean(value);
         }
     }
