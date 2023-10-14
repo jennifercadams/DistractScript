@@ -51,6 +51,7 @@
     <Compile Include="Data\TreeNode.cs" />
     <Compile Include="Exceptions\FileFormatException.cs" />
     <Compile Include="Exceptions\MissingFileNameException.cs" />
+    <Compile Include="Exceptions\SyntaxException.cs" />
     <Compile Include="Exceptions\TooManyArgumentsException.cs" />
     <Compile Include="Core\Interpreter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using DistractScript.Data;
+using DistractScript.Exceptions;
 using DistractScript.Tokens;
 
 namespace DistractScript.Core
@@ -18,9 +19,39 @@ namespace DistractScript.Core
         {
             var tree = new ParseTree();
 
-
+            while (Tokens.Count > 0)
+            {
+                var node = ParseNextBlock();
+                tree.AddNode(node);
+            }
 
             return tree;
+        }
+
+        private BlockNode ParseNextBlock()
+        {
+            var keywordToken = Tokens[0] as KeywordToken;
+            if (keywordToken == null)
+            {
+                throw new SyntaxException();
+            }
+
+            var block = new BlockNode(keywordToken.Keyword);
+            var blockComplete = false;
+            while (!blockComplete)
+            {
+                var token = Tokens[0];
+                var tokenNode = new TokenNode(token);
+                block.AddChild(tokenNode);
+                Tokens.Remove(token);
+
+                if (token is SeparatorToken || Tokens.Count == 0)
+                {
+                    blockComplete = true;
+                }
+            }
+
+            return block;
         }
     }
 }
