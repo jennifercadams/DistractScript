@@ -44,6 +44,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Collections\TokenCollections\OperatorCollection.cs" />
+    <Compile Include="Core\Evaluator.cs" />
     <Compile Include="Core\Parser.cs" />
     <Compile Include="Data\BlockNode.cs" />
     <Compile Include="Data\ParseTree.cs" />
