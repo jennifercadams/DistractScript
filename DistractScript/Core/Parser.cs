@@ -36,7 +36,7 @@ namespace DistractScript.Core
                 throw new SyntaxException(Tokens[0].StringValue, Tokens[0].Line, Tokens[0].Column);
             }
 
-            var block = new BlockNode(keywordToken.Keyword);
+            var block = new BlockNode(keywordToken);
             var blockComplete = false;
             while (!blockComplete)
             {

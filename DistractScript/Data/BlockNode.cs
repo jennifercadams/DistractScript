@@ -16,9 +16,10 @@ namespace DistractScript.Data
         public Keyword Keyword { get; private set; }
         public Command Command { get; private set; }
 
-        public BlockNode(Keyword keyword)
+        public BlockNode(KeywordToken token)
+            : base(token)
         {
-            Keyword = keyword;
+            Keyword = token.Keyword;
         }
 
         public void SetCommand()
