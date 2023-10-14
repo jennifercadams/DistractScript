@@ -33,7 +33,7 @@ namespace DistractScript.Core
             var keywordToken = Tokens[0] as KeywordToken;
             if (keywordToken == null)
             {
-                throw new SyntaxException();
+                throw new SyntaxException(Tokens[0].StringValue, Tokens[0].Line, Tokens[0].Column);
             }
 
             var block = new BlockNode(keywordToken.Keyword);
