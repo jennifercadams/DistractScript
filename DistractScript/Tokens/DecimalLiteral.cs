@@ -2,7 +2,7 @@
 
 namespace DistractScript.Tokens
 {
-    public class DecimalLiteral : Token
+    public class DecimalLiteral : LiteralToken
     {
         public decimal Value { get; private set; }
 

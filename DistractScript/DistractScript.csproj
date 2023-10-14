@@ -69,6 +69,7 @@
     <Compile Include="Tokens\DecimalLiteral.cs" />
     <Compile Include="Tokens\IntegerLiteral.cs" />
     <Compile Include="Tokens\KeywordToken.cs" />
+    <Compile Include="Tokens\LiteralToken.cs" />
     <Compile Include="Tokens\OperatorToken.cs" />
     <Compile Include="Tokens\SeparatorToken.cs" />
     <Compile Include="Tokens\StringLiteral.cs" />

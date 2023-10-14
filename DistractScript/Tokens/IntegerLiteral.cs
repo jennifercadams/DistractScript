@@ -2,7 +2,7 @@
 
 namespace DistractScript.Tokens
 {
-    public class IntegerLiteral : Token
+    public class IntegerLiteral : LiteralToken
     {
         public int Value { get; private set; }
 

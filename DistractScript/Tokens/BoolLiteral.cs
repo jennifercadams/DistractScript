@@ -2,7 +2,7 @@
 
 namespace DistractScript.Tokens
 {
-    public class BoolLiteral : Token
+    public class BoolLiteral : LiteralToken
     {
         public bool Value { get; private set; }
 
