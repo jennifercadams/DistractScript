@@ -11,6 +11,7 @@ namespace DistractScript.Data
 
         public TreeNode(Token token)
         {
+            Token = token;
             Children = new List<TreeNode>();
         }
 
