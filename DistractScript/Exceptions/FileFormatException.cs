@@ -1,10 +1,11 @@
 ﻿using System;
+using DistractScript.Resources;
 
 namespace DistractScript.Exceptions
 {
     class FileFormatException : Exception
     {
         public FileFormatException()
-            : base(Resources.ErrorMessages.IncorrectFileFormat) { }
+            : base(ErrorMessages.IncorrectFileFormat) { }
     }
 }
