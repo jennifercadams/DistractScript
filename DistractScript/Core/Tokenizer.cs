@@ -48,7 +48,7 @@ namespace DistractScript.Core
                 {
                     token = new DecimalLiteral(tokenString, line, column);
                 }
-                else if (tokenString == ";")
+                else if (tokenString == SeparatorCollection.EndStatement)
                 {
                     token = new SeparatorToken(tokenString, line, column);
                 }
@@ -97,7 +97,7 @@ namespace DistractScript.Core
                     i = endIndex;
                     token = "";
                 }
-                else if (c == ';')
+                else if (c == SeparatorCollection.EndStatement[0])
                 {
                     if (token != "")
                     {
