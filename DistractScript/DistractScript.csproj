@@ -75,6 +75,7 @@
     <Compile Include="Tokens\TypeToken.cs" />
     <Compile Include="Tokens\VariableName.cs" />
     <Compile Include="Variables\Variable.cs" />
+    <Compile Include="Variables\VariableCollection.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
