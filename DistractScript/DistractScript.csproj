@@ -47,6 +47,7 @@
     <Compile Include="Collections\TokenCollections\SeparatorCollection.cs" />
     <Compile Include="Core\Evaluator.cs" />
     <Compile Include="Core\Parser.cs" />
+    <Compile Include="Core\Validator.cs" />
     <Compile Include="Data\BlockNode.cs" />
     <Compile Include="Data\ParseTree.cs" />
     <Compile Include="Data\TokenNode.cs" />

@@ -1,16 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using DistractScript.Core;
 using DistractScript.Tokens;
 
 namespace DistractScript.Data
 {
-    public enum Command
-    {
-        DeclareEmptyVar,
-        DeclareVarWithValue
-    }
-
     public class BlockNode : TreeNode
     {
         public Keyword Keyword { get; private set; }

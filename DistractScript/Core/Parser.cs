@@ -52,8 +52,22 @@ namespace DistractScript.Core
             }
 
             block.SetCommand();
+            ValidateBlock(block);
 
             return block;
+        }
+
+        private void ValidateBlock(BlockNode block)
+        {
+            switch (block.Command)
+            {
+                case Command.DeclareEmptyVar:
+                    Validator.ValidateDeclareEmptyVar(block);
+                    break;
+                case Command.DeclareVarWithValue:
+                    Validator.ValidateDeclareVarWithValue(block);
+                    break;
+            }
         }
     }
 }
