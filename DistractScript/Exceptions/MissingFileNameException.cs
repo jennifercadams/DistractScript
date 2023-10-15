@@ -1,11 +1,12 @@
 ﻿using System;
-using DistractScript.Resources;
 
 namespace DistractScript.Exceptions
 {
     public class MissingFileNameException : Exception
     {
+        private const string MissingFileName = "You forgot the filename. It's okay, DistractScript forgets things, too.";
+
         public MissingFileNameException()
-            : base(ErrorMessages.MissingFileName) { }
+            : base(MissingFileName) { }
     }
 }
