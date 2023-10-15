@@ -43,8 +43,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Collections\TokenCollections\OperatorCollection.cs" />
-    <Compile Include="Collections\TokenCollections\SeparatorCollection.cs" />
+    <Compile Include="Tokens\TokenCollections\OperatorCollection.cs" />
+    <Compile Include="Tokens\TokenCollections\SeparatorCollection.cs" />
     <Compile Include="Core\Evaluator.cs" />
     <Compile Include="Core\Parser.cs" />
     <Compile Include="Core\Validator.cs" />
@@ -65,9 +65,9 @@
       <DependentUpon>ErrorMessages.resx</DependentUpon>
     </Compile>
     <Compile Include="Core\Tokenizer.cs" />
-    <Compile Include="Collections\TokenCollections\KeywordCollection.cs" />
-    <Compile Include="Collections\TokenCollections\TokenCollection.cs" />
-    <Compile Include="Collections\TokenCollections\TypeCollection.cs" />
+    <Compile Include="Tokens\TokenCollections\KeywordCollection.cs" />
+    <Compile Include="Tokens\TokenCollections\TokenCollection.cs" />
+    <Compile Include="Tokens\TokenCollections\TypeCollection.cs" />
     <Compile Include="Tokens\BoolLiteral.cs" />
     <Compile Include="Tokens\DecimalLiteral.cs" />
     <Compile Include="Tokens\IntegerLiteral.cs" />

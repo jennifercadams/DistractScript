@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using DistractScript.Tokens;
-using DistractScript.Collections.TokenCollections;
 using System.Text.RegularExpressions;
+using DistractScript.Tokens;
+using DistractScript.Tokens.TokenCollections;
 
 namespace DistractScript.Core
 {

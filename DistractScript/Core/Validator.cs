@@ -1,8 +1,8 @@
 ﻿using System;
-using DistractScript.Collections.TokenCollections;
 using DistractScript.Data;
 using DistractScript.Exceptions;
 using DistractScript.Tokens;
+using DistractScript.Tokens.TokenCollections;
 
 namespace DistractScript.Core
 {

@@ -1,5 +1,5 @@
 ﻿using System;
-using DistractScript.Collections.TokenCollections;
+using DistractScript.Tokens.TokenCollections;
 
 namespace DistractScript.Tokens
 {

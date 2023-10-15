@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq;
 
-namespace DistractScript.Collections.TokenCollections
+namespace DistractScript.Tokens.TokenCollections
 {
     public abstract class TokenCollection<T>
     {
