@@ -55,7 +55,8 @@ namespace DistractScript.Core
             var filePath = $"{directory}\\{fileName}";
             if (!File.Exists(filePath))
             {
-                throw new FileNotFoundException(Resources.ErrorMessages.FileNotFound);
+                var errorMessage = "File not found. Where did you last have it? Maybe try retracing your steps?";
+                throw new FileNotFoundException(errorMessage);
             }
 
             return File.ReadAllText(filePath);
