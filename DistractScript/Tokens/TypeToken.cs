@@ -26,5 +26,19 @@ namespace DistractScript.Tokens
                     break;
             }
         }
+
+        public TypeToken(Type type, int line, int column)
+            : base("", line, column)
+        {
+            Type = type;
+            if (type == typeof(string))
+                StringValue = TypeCollection.StringType;
+            if (type == typeof(bool))
+                StringValue = TypeCollection.BoolType;
+            if (type == typeof(int))
+                StringValue = TypeCollection.IntType;
+            if (type == typeof(decimal))
+                StringValue = TypeCollection.DecimalType;
+        }
     }
 }

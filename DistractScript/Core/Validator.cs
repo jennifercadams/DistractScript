@@ -37,6 +37,22 @@ namespace DistractScript.Core
             block.SetLiteralToken(literalToken);
         }
 
+        public static void ValidateAssignVar(BlockNode block)
+        {
+            var nodes = block.Children;
+
+            var variableNameToken = ValidateVariableNameToken(nodes[0].Token);
+            ValidateOperatorToken(nodes[1].Token, OperatorCollection.Assignment);
+            var literalToken = ValidateLiteralToken(nodes[2].Token);
+            ValidateSeparatorToken(nodes[3].Token, SeparatorCollection.EndStatement);
+
+            block.SetVariableNameToken(variableNameToken);
+            block.SetLiteralToken(literalToken);
+
+            var typeToken = new TypeToken(literalToken.Type, literalToken.Line, literalToken.Column);
+            block.SetTypeToken(typeToken);
+        }
+
         private static KeywordToken ValidateKeywordToken(Token token, Keyword keyword)
         {
             if (!(token is KeywordToken keywordToken) || keywordToken.Keyword != keyword)
@@ -109,6 +125,18 @@ namespace DistractScript.Core
                 var expected = typeToken.Type.Name;
                 var actual = literalToken.Type.Name;
                 throw new TypeException(variableName, expected, actual, token.Line, token.Column);
+            }
+
+            return literalToken;
+        }
+
+        private static LiteralToken ValidateLiteralToken(Token token)
+        {
+            if (!(token is LiteralToken literalToken))
+            {
+                var actual = token.StringValue;
+                var expected = $"value";
+                throw new SyntaxException(actual, expected, token.Line, token.Column);
             }
 
             return literalToken;

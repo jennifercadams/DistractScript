@@ -9,7 +9,8 @@ namespace DistractScript.Data
     {
         None,
         DeclareEmptyVar,
-        DeclareVarWithValue
+        DeclareVarWithValue,
+        AssignVar
     }
 
     public class BlockNode : TreeNode
@@ -24,6 +25,12 @@ namespace DistractScript.Data
             : base(token)
         {
             Keyword = token.Keyword;
+        }
+
+        public BlockNode(VariableName token)
+            : base(token)
+        {
+            VariableNameToken = token;
         }
 
         public void SetCommand()
@@ -42,6 +49,11 @@ namespace DistractScript.Data
                         Command = Command.DeclareEmptyVar;
                     }
                     break;
+                case Keyword.None:
+                    Command = Command.AssignVar;
+                    break;
+                default:
+                    throw new NotImplementedException();
             }
         }
 

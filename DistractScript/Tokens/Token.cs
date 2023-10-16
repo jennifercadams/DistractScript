@@ -4,7 +4,7 @@ namespace DistractScript.Tokens
 {
     public class Token
     {
-        public string StringValue { get; private set; }
+        public string StringValue { get; protected set; }
         public int Line { get; private set; }
         public int Column { get; private set; }
 

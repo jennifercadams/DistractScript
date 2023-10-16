@@ -57,6 +57,10 @@ namespace DistractScript.Core
             {
                 return new BlockNode(keywordToken);
             }
+            else if (Tokens[0] is VariableName variableNameToken)
+            {
+                return new BlockNode(variableNameToken);
+            }
             else
             {
                 throw new SyntaxException(Tokens[0].StringValue, Tokens[0].Line, Tokens[0].Column);
@@ -72,6 +76,9 @@ namespace DistractScript.Core
                     break;
                 case Command.DeclareVarWithValue:
                     Validator.ValidateDeclareVarWithValue(block);
+                    break;
+                case Command.AssignVar:
+                    Validator.ValidateAssignVar(block);
                     break;
             }
         }
