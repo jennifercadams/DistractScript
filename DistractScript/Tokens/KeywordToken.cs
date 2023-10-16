@@ -5,6 +5,7 @@ namespace DistractScript.Tokens
 {
     public enum Keyword
     {
+        None,
         DeclareVar
     }
 
