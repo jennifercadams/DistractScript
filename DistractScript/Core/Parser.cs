@@ -30,13 +30,7 @@ namespace DistractScript.Core
 
         private BlockNode ParseNextBlock()
         {
-            var keywordToken = Tokens[0] as KeywordToken;
-            if (keywordToken == null)
-            {
-                throw new SyntaxException(Tokens[0].StringValue, Tokens[0].Line, Tokens[0].Column);
-            }
-
-            var block = new BlockNode(keywordToken);
+            var block = CreateBlock();
             var blockComplete = false;
             while (!blockComplete)
             {
@@ -55,6 +49,18 @@ namespace DistractScript.Core
             ValidateBlock(block);
 
             return block;
+        }
+
+        private BlockNode CreateBlock()
+        {
+            if (Tokens[0] is KeywordToken keywordToken)
+            {
+                return new BlockNode(keywordToken);
+            }
+            else
+            {
+                throw new SyntaxException(Tokens[0].StringValue, Tokens[0].Line, Tokens[0].Column);
+            }
         }
 
         private void ValidateBlock(BlockNode block)
