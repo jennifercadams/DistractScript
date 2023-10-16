@@ -20,9 +20,12 @@ namespace DistractScript.Core
             var nodes = block.Children;
 
             ValidateKeywordToken(nodes[0].Token, Keyword.DeclareVar);
-            ValidateTypeToken(nodes[1].Token);
-            ValidateVariableNameToken(nodes[2].Token);
+            var typeToken = ValidateTypeToken(nodes[1].Token);
+            var variableNameToken = ValidateVariableNameToken(nodes[2].Token);
             ValidateSeparatorToken(nodes[3].Token, SeparatorCollection.EndStatement);
+
+            block.SetTypeToken(typeToken);
+            block.SetVariableNameToken(variableNameToken);
         }
 
         public static void ValidateDeclareVarWithValue(BlockNode block)
@@ -33,8 +36,12 @@ namespace DistractScript.Core
             var typeToken = ValidateTypeToken(nodes[1].Token);
             var variableNameToken = ValidateVariableNameToken(nodes[2].Token);
             ValidateOperatorToken(nodes[3].Token, OperatorCollection.Assignment);
-            ValidateLiteralToken(nodes[4].Token, typeToken, variableNameToken.StringValue);
+            var literalToken = ValidateLiteralToken(nodes[4].Token, typeToken, variableNameToken.StringValue);
             ValidateSeparatorToken(nodes[5].Token, SeparatorCollection.EndStatement);
+
+            block.SetTypeToken(typeToken);
+            block.SetVariableNameToken(variableNameToken);
+            block.SetLiteralToken(literalToken);
         }
 
         private static KeywordToken ValidateKeywordToken(Token token, Keyword keyword)

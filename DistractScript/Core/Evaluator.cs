@@ -41,9 +41,8 @@ namespace DistractScript.Core
 
         private void EvaluateDeclareEmptyVar(BlockNode block)
         {
-            var typeToken = block.Children[1].Token as TypeToken;
-            var type = typeToken.Type;
-            var name = block.Children[2].Token.StringValue;
+            var type = block.TypeToken.Type;
+            var name = block.VariableNameToken.StringValue;
 
             if (type == typeof(string))
             {
@@ -69,10 +68,9 @@ namespace DistractScript.Core
 
         private void EvaluateDeclareVarWithValue(BlockNode block)
         {
-            var typeToken = block.Children[1].Token as TypeToken;
-            var type = typeToken.Type;
-            var name = block.Children[2].Token.StringValue;
-            var literalToken = block.Children[4].Token;
+            var type = block.TypeToken.Type;
+            var name = block.VariableNameToken.StringValue;
+            var literalToken = block.LiteralToken;
 
             if (type == typeof(string))
             {

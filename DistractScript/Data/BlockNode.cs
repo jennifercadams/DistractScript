@@ -10,6 +10,9 @@ namespace DistractScript.Data
     {
         public Keyword Keyword { get; private set; }
         public Command Command { get; private set; }
+        public TypeToken TypeToken { get; private set; }
+        public VariableName VariableNameToken { get; private set; }
+        public LiteralToken LiteralToken { get; private set; }
 
         public BlockNode(KeywordToken token)
             : base(token)
@@ -49,6 +52,21 @@ namespace DistractScript.Data
             }
 
             return tokens;
+        }
+
+        public void SetTypeToken(TypeToken token)
+        {
+            TypeToken = token;
+        }
+
+        public void SetVariableNameToken(VariableName token)
+        {
+            VariableNameToken = token;
+        }
+
+        public void SetLiteralToken(LiteralToken token)
+        {
+            LiteralToken = token;
         }
     }
 }
