@@ -8,6 +8,7 @@ namespace DistractScript.Core
 {
     public enum Command
     {
+        None,
         DeclareEmptyVar,
         DeclareVarWithValue
     }
