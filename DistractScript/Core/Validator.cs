@@ -6,13 +6,6 @@ using DistractScript.Tokens.TokenCollections;
 
 namespace DistractScript.Core
 {
-    public enum Command
-    {
-        None,
-        DeclareEmptyVar,
-        DeclareVarWithValue
-    }
-
     public static class Validator
     {
         public static void ValidateDeclareEmptyVar(BlockNode block)
