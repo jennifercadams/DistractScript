@@ -21,6 +21,7 @@ namespace DistractScript.Core
                 var parseTree = parser.BuildParseTree();
 
                 var evaluator = new Evaluator(parseTree);
+                evaluator.Process();
             }
             catch (Exception exception)
             {
