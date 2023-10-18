@@ -43,12 +43,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Exceptions\VarAlreadyExistsException.cs" />
-    <Compile Include="Exceptions\VarDoesNotExistException.cs" />
-    <Compile Include="Tokens\TokenCollections\OperatorCollection.cs" />
-    <Compile Include="Tokens\TokenCollections\SeparatorCollection.cs" />
     <Compile Include="Core\Evaluator.cs" />
+    <Compile Include="Core\Interpreter.cs" />
     <Compile Include="Core\Parser.cs" />
+    <Compile Include="Core\Tokenizer.cs" />
     <Compile Include="Core\Validator.cs" />
     <Compile Include="Data\BlockNode.cs" />
     <Compile Include="Data\ParseTree.cs" />
@@ -58,13 +56,10 @@
     <Compile Include="Exceptions\MissingFileNameException.cs" />
     <Compile Include="Exceptions\SyntaxException.cs" />
     <Compile Include="Exceptions\TooManyArgumentsException.cs" />
-    <Compile Include="Core\Interpreter.cs" />
     <Compile Include="Exceptions\TypeException.cs" />
+    <Compile Include="Exceptions\VarAlreadyExistsException.cs" />
+    <Compile Include="Exceptions\VarDoesNotExistException.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Core\Tokenizer.cs" />
-    <Compile Include="Tokens\TokenCollections\KeywordCollection.cs" />
-    <Compile Include="Tokens\TokenCollections\TokenCollection.cs" />
-    <Compile Include="Tokens\TokenCollections\TypeCollection.cs" />
     <Compile Include="Tokens\BoolLiteral.cs" />
     <Compile Include="Tokens\DecimalLiteral.cs" />
     <Compile Include="Tokens\IntegerLiteral.cs" />
@@ -76,6 +71,11 @@
     <Compile Include="Tokens\Token.cs" />
     <Compile Include="Tokens\TypeToken.cs" />
     <Compile Include="Tokens\VariableName.cs" />
+    <Compile Include="Tokens\TokenCollections\KeywordCollection.cs" />
+    <Compile Include="Tokens\TokenCollections\TokenCollection.cs" />
+    <Compile Include="Tokens\TokenCollections\TypeCollection.cs" />
+    <Compile Include="Tokens\TokenCollections\OperatorCollection.cs" />
+    <Compile Include="Tokens\TokenCollections\SeparatorCollection.cs" />
     <Compile Include="Variables\Variable.cs" />
     <Compile Include="Variables\VariableCollection.cs" />
   </ItemGroup>
