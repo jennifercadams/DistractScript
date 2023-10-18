@@ -1,5 +1,6 @@
 ﻿using System;
 using DistractScript.Data;
+using DistractScript.Exceptions;
 using DistractScript.Tokens;
 using DistractScript.Variables;
 
@@ -34,6 +35,9 @@ namespace DistractScript.Core
                 case Command.DeclareVarWithValue:
                     EvaluateDeclareVarWithValue(block);
                     break;
+                case Command.AssignVar:
+                    EvaluateAssignVar(block);
+                    break;
                 default:
                     throw new NotImplementedException();
             }
@@ -43,59 +47,19 @@ namespace DistractScript.Core
         {
             var type = block.TypeToken.Type;
             var name = block.VariableNameToken.StringValue;
-
-            if (type == typeof(string))
-            {
-                var newVariable = new Variable<string>(name);
-                GlobalVariables.Add(newVariable);
-            }
-            else if (type == typeof(bool))
-            {
-                var newVariable = new Variable<bool>(name);
-                GlobalVariables.Add(newVariable);
-            }
-            else if (type == typeof(int))
-            {
-                var newVariable = new Variable<int>(name);
-                GlobalVariables.Add(newVariable);
-            }
-            else if (type == typeof(decimal))
-            {
-                var newVariable = new Variable<decimal>(name);
-                GlobalVariables.Add(newVariable);
-            }
+            GlobalVariables.AddEmpty(name, type);
         }
 
         private void EvaluateDeclareVarWithValue(BlockNode block)
         {
-            var type = block.TypeToken.Type;
             var name = block.VariableNameToken.StringValue;
             var literalToken = block.LiteralToken;
+            GlobalVariables.AddWithValue(name, literalToken);
+        }
 
-            if (type == typeof(string))
-            {
-                var value = (literalToken as StringLiteral).Value;
-                var newVariable = new Variable<string>(name, value);
-                GlobalVariables.Add(newVariable);
-            }
-            else if (type == typeof(bool))
-            {
-                var value = (literalToken as BoolLiteral).Value;
-                var newVariable = new Variable<bool>(name, value);
-                GlobalVariables.Add(newVariable);
-            }
-            else if (type == typeof(int))
-            {
-                var value = (literalToken as IntegerLiteral).Value;
-                var newVariable = new Variable<int>(name, value);
-                GlobalVariables.Add(newVariable);
-            }
-            else if (type == typeof(decimal))
-            {
-                var value = (literalToken as DecimalLiteral).Value;
-                var newVariable = new Variable<decimal>(name, value);
-                GlobalVariables.Add(newVariable);
-            }
+        private void EvaluateAssignVar(BlockNode block)
+        {
+
         }
     }
 }
