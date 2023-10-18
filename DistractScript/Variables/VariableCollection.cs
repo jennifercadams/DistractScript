@@ -85,45 +85,41 @@ namespace DistractScript.Variables
             VariableNames.Add(name);
         }
 
-        private Variable<T> Find<T>(string name)
+        public void AssignValue(string name, LiteralToken literalToken)
         {
-            var list = GetList<T>();
-            return list.Find(v => v.Name == name);
-        }
+            if (!VariableExists(name))
+                throw new VarDoesNotExistException(name);
 
-        public void AssignValue<T>(Variable<T> variable, T value)
-        {
-            var found = Find<T>(variable.Name);
-            found.Set(value);
+            var type = literalToken.Type;
+            if (type == typeof(string))
+            {
+                var stringLiteral = literalToken as StringLiteral;
+                var variable = Strings.Find(v => v.Name == name);
+                variable.Set(stringLiteral.Value);
+            }
+            else if (type == typeof(bool))
+            {
+                var boolLiteral = literalToken as BoolLiteral;
+                var variable = Booleans.Find(v => v.Name == name);
+                variable.Set(boolLiteral.Value);
+            }
+            else if (type == typeof(int))
+            {
+                var integerLiteral = literalToken as IntegerLiteral;
+                var variable = Integers.Find(v => v.Name == name);
+                variable.Set(integerLiteral.Value);
+            }
+            else if (type == typeof(decimal))
+            {
+                var decimalLiteral = literalToken as DecimalLiteral;
+                var variable = Decimals.Find(v => v.Name == name);
+                variable.Set(decimalLiteral.Value);
+            }
         }
 
         private bool VariableExists(string name)
         {
             return VariableNames.Contains(name);
-        }
-
-        private List<Variable<T>> GetList<T>()
-        {
-            if (typeof(T) == typeof(string))
-            {
-                return Strings as List<Variable<T>>;
-            }
-            else if (typeof(T) == typeof(bool))
-            {
-                return Booleans as List<Variable<T>>;
-            }
-            else if (typeof(T) == typeof(int))
-            {
-                return Integers as List<Variable<T>>;
-            }
-            else if (typeof(T) == typeof(decimal))
-            {
-                return Decimals as List<Variable<T>>;
-            }
-            else
-            {
-                throw new NotImplementedException();
-            }
         }
     }
 }

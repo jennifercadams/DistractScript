@@ -59,7 +59,9 @@ namespace DistractScript.Core
 
         private void EvaluateAssignVar(BlockNode block)
         {
-
+            var name = block.VariableNameToken.StringValue;
+            var literalToken = block.LiteralToken;
+            GlobalVariables.AssignValue(name, literalToken);
         }
     }
 }
