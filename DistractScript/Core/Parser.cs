@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using DistractScript.Data;
 using DistractScript.Exceptions;
 using DistractScript.Tokens;
+using DistractScript.Tokens.TokenCollections;
 
 namespace DistractScript.Core
 {
@@ -39,7 +40,7 @@ namespace DistractScript.Core
                 block.AddChild(tokenNode);
                 Tokens.Remove(token);
 
-                if (token is SeparatorToken || Tokens.Count == 0)
+                if (token.StringValue == SeparatorCollection.EndStatement || Tokens.Count == 0)
                 {
                     blockComplete = true;
                 }
