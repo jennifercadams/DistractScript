@@ -5,7 +5,12 @@ namespace DistractScript.Tokens
 {
     public enum Operator
     {
-        Assignment
+        Assignment,
+        Sum,
+        Difference,
+        Product,
+        Quotient,
+        Modulo
     }
 
     public class OperatorToken : Token
@@ -19,6 +24,21 @@ namespace DistractScript.Tokens
             {
                 case OperatorCollection.Assignment:
                     Operator = Operator.Assignment;
+                    break;
+                case OperatorCollection.Sum:
+                    Operator = Operator.Sum;
+                    break;
+                case OperatorCollection.Difference:
+                    Operator = Operator.Difference;
+                    break;
+                case OperatorCollection.Product:
+                    Operator = Operator.Product;
+                    break;
+                case OperatorCollection.Quotient:
+                    Operator = Operator.Quotient;
+                    break;
+                case OperatorCollection.Modulo:
+                    Operator = Operator.Modulo;
                     break;
             }
         }
