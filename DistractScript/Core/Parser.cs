@@ -36,9 +36,18 @@ namespace DistractScript.Core
             while (!blockComplete)
             {
                 var token = Tokens[0];
-                var tokenNode = new TokenNode(token);
-                block.AddChild(tokenNode);
-                Tokens.Remove(token);
+
+                if (token is LiteralToken && Tokens[1] is OperatorToken)
+                {
+                    var expressionNode = ParseExpression();
+                    block.AddChild(expressionNode);
+                }
+                else
+                {
+                    var tokenNode = new TokenNode(token);
+                    block.AddChild(tokenNode);
+                    Tokens.Remove(token);
+                }
 
                 if (token.StringValue == SeparatorCollection.EndStatement || Tokens.Count == 0)
                 {
@@ -66,6 +75,27 @@ namespace DistractScript.Core
             {
                 throw new SyntaxException(Tokens[0].StringValue, Tokens[0].Line, Tokens[0].Column);
             }
+        }
+
+        private ExpressionNode ParseExpression()
+        {
+            var expressionNode = new ExpressionNode(Tokens[0]);
+            
+            var expressionComplete = false;
+            while (!expressionComplete)
+            {
+                var token = Tokens[0];
+                var tokenNode = new TokenNode(token);
+                expressionNode.AddChild(tokenNode);
+                Tokens.Remove(token);
+
+                if (Tokens[0].StringValue == SeparatorCollection.EndStatement || Tokens.Count == 0)
+                {
+                    expressionComplete = true;
+                }
+            }
+
+            return expressionNode;
         }
 
         private void ValidateBlock(BlockNode block)

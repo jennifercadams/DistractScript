@@ -49,6 +49,7 @@
     <Compile Include="Core\Tokenizer.cs" />
     <Compile Include="Core\Validator.cs" />
     <Compile Include="Data\BlockNode.cs" />
+    <Compile Include="Data\ExpressionNode.cs" />
     <Compile Include="Data\ParseTree.cs" />
     <Compile Include="Data\TokenNode.cs" />
     <Compile Include="Data\TreeNode.cs" />
