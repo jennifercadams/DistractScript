@@ -43,6 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Exceptions\VarAlreadyExistsException.cs" />
     <Compile Include="Tokens\TokenCollections\OperatorCollection.cs" />
     <Compile Include="Tokens\TokenCollections\SeparatorCollection.cs" />
     <Compile Include="Core\Evaluator.cs" />
