@@ -1,7 +1,5 @@
 ﻿using System;
 using DistractScript.Data;
-using DistractScript.Exceptions;
-using DistractScript.Tokens;
 using DistractScript.Variables;
 
 namespace DistractScript.Core
