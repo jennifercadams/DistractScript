@@ -20,6 +20,7 @@ namespace DistractScript.Data
         public TypeToken TypeToken { get; private set; }
         public VariableName VariableNameToken { get; private set; }
         public LiteralToken LiteralToken { get; private set; }
+        public List<Token> ExpressionTokens { get; private set; }
 
         public BlockNode(KeywordToken token)
             : base(token)
@@ -85,6 +86,11 @@ namespace DistractScript.Data
         public void SetLiteralToken(LiteralToken token)
         {
             LiteralToken = token;
+        }
+
+        public void SetExpressionTokens(List<Token> tokens)
+        {
+            ExpressionTokens = tokens;
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using DistractScript.Data;
 using DistractScript.Exceptions;
 using DistractScript.Tokens;
@@ -29,12 +30,20 @@ namespace DistractScript.Core
             var typeToken = ValidateTypeToken(nodes[1].Token);
             var variableNameToken = ValidateVariableNameToken(nodes[2].Token);
             ValidateOperatorToken(nodes[3].Token, OperatorCollection.Assignment);
-            var literalToken = ValidateLiteralToken(nodes[4].Token, typeToken, variableNameToken.StringValue);
+            if (nodes[4] is ExpressionNode expressionNode)
+            {
+                var expressionTokens = ValidateExpression(expressionNode, typeToken);
+                block.SetExpressionTokens(expressionTokens);
+            }
+            else
+            {
+                var literalToken = ValidateLiteralToken(nodes[4].Token, typeToken);
+                block.SetLiteralToken(literalToken);
+            }
             ValidateSeparatorToken(nodes[5].Token, SeparatorCollection.EndStatement);
 
             block.SetTypeToken(typeToken);
             block.SetVariableNameToken(variableNameToken);
-            block.SetLiteralToken(literalToken);
         }
 
         public static void ValidateAssignVar(BlockNode block)
@@ -112,7 +121,19 @@ namespace DistractScript.Core
             return operatorToken;
         }
 
-        private static LiteralToken ValidateLiteralToken(Token token, TypeToken typeToken, string variableName)
+        private static OperatorToken ValidateOperatorToken(Token token)
+        {
+            if (!(token is OperatorToken operatorToken))
+            {
+                var actual = token.StringValue;
+                var expected = "operator";
+                throw new SyntaxException(actual, expected, token.Line, token.Column);
+            }
+
+            return operatorToken;
+        }
+
+        private static LiteralToken ValidateLiteralToken(Token token, TypeToken typeToken)
         {
             if (!(token is LiteralToken literalToken))
             {
@@ -124,7 +145,7 @@ namespace DistractScript.Core
             {
                 var expected = typeToken.Type.Name;
                 var actual = literalToken.Type.Name;
-                throw new TypeException(variableName, expected, actual, token.Line, token.Column);
+                throw new TypeException(expected, actual, token.Line, token.Column);
             }
 
             return literalToken;
@@ -140,6 +161,43 @@ namespace DistractScript.Core
             }
 
             return literalToken;
+        }
+
+        private static List<Token> ValidateExpression(ExpressionNode expressionNode, TypeToken typeToken)
+        {
+            var expressionTokens = new List<Token>();
+
+            var nodes = expressionNode.Children;
+            for (var i = 0; i < nodes.Count; i++)
+            {
+                if (i % 2 == 0)
+                {
+                    var literalToken = ValidateLiteralToken(nodes[i].Token, typeToken);
+                    expressionTokens.Add(literalToken);
+                }
+                else
+                {
+                    var operatorToken = ValidateOperatorToken(nodes[i].Token);
+                    expressionTokens.Add(operatorToken);
+                }
+            }
+
+            for (var i = 0; i < expressionTokens.Count; i++)
+            {
+                if (!(expressionTokens[i] is OperatorToken operatorToken))
+                    continue;
+
+                if (typeToken.Type == typeof(bool))
+                {
+                    throw new OperatorException(operatorToken.StringValue, typeToken.StringValue);
+                }
+                else if (typeToken.Type == typeof(string) || operatorToken.Operator != Operator.Sum)
+                {
+                    throw new OperatorException(operatorToken.StringValue, typeToken.StringValue);
+                }
+            }
+
+            return expressionTokens;
         }
     }
 }
