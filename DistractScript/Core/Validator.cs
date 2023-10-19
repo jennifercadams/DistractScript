@@ -102,7 +102,7 @@ namespace DistractScript.Core
 
         private static OperatorToken ValidateOperatorToken(Token token, string operatorString)
         {
-            if (!(token is OperatorToken operatorToken) || operatorToken.Operator != Operator.Assignment)
+            if (!(token is OperatorToken operatorToken) || operatorToken.StringValue != operatorString)
             {
                 var actual = token.StringValue;
                 var expected = operatorString;
