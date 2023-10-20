@@ -172,8 +172,15 @@ namespace DistractScript.Core
             {
                 if (i % 2 == 0)
                 {
-                    var literalToken = ValidateLiteralToken(nodes[i].Token, typeToken);
-                    expressionTokens.Add(literalToken);
+                    if (nodes[i].Token is VariableName variableName)
+                    {
+                        expressionTokens.Add(variableName);
+                    }
+                    else
+                    {
+                        var literalToken = ValidateLiteralToken(nodes[i].Token, typeToken);
+                        expressionTokens.Add(literalToken);
+                    }
                 }
                 else
                 {

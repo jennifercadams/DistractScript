@@ -37,7 +37,9 @@ namespace DistractScript.Core
             {
                 var token = Tokens[0];
 
-                if (token is LiteralToken && Tokens[1] is OperatorToken)
+                if ((token is LiteralToken || token is VariableName) 
+                    && Tokens[1] is OperatorToken operatorToken 
+                    && operatorToken.Operator != Operator.Assignment)
                 {
                     var expressionNode = ParseExpression();
                     block.AddChild(expressionNode);
