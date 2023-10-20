@@ -12,12 +12,13 @@ namespace DistractScript.Core
         {
             var splitText = Split(text);
             var tokens = new List<Token>();
+            var variables = new Dictionary<string, Type>();
             var line = 1;
             var column = 0;
 
-            foreach (var substring in splitText)
+            for (var i = 0; i < splitText.Count; i++)
             {
-                var tokenString = substring.Trim();
+                var tokenString = splitText[i].Trim();
 
                 Token token;
                 if (KeywordCollection.Contains(tokenString))
@@ -54,12 +55,30 @@ namespace DistractScript.Core
                 }
                 else
                 {
-                    token = new VariableName(tokenString, line, column);
+                    var prevToken = tokens[tokens.Count - 1];
+                    Type type;
+                    if (prevToken is TypeToken typeToken)
+                    {
+                        type = typeToken.Type;
+                        if (variables.ContainsKey(tokenString))
+                        {
+                            variables[tokenString] = type;
+                        }
+                        else
+                        {
+                            variables.Add(tokenString, type);
+                        }
+                    }
+                    else
+                    {
+                        type = variables[tokenString];
+                    }
+                    token = new VariableName(tokenString, type, line, column);
                 }
                 tokens.Add(token);
 
-                column += substring.Length;
-                if (substring.Contains("\n"))
+                column += splitText[i].Length;
+                if (splitText[i].Contains("\n"))
                 {
                     column = 0;
                     line++;

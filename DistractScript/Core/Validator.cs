@@ -15,7 +15,7 @@ namespace DistractScript.Core
 
             ValidateKeywordToken(nodes[0].Token, Keyword.DeclareVar);
             var typeToken = ValidateTypeToken(nodes[1].Token);
-            var variableNameToken = ValidateVariableNameToken(nodes[2].Token);
+            var variableNameToken = ValidateVariableNameToken(nodes[2].Token, typeToken);
             ValidateSeparatorToken(nodes[3].Token, SeparatorCollection.EndStatement);
 
             block.SetTypeToken(typeToken);
@@ -28,7 +28,7 @@ namespace DistractScript.Core
 
             ValidateKeywordToken(nodes[0].Token, Keyword.DeclareVar);
             var typeToken = ValidateTypeToken(nodes[1].Token);
-            var variableNameToken = ValidateVariableNameToken(nodes[2].Token);
+            var variableNameToken = ValidateVariableNameToken(nodes[2].Token, typeToken);
             ValidateOperatorToken(nodes[3].Token, OperatorCollection.Assignment);
             if (nodes[4] is ExpressionNode expressionNode)
             {
@@ -51,15 +51,15 @@ namespace DistractScript.Core
             var nodes = block.Children;
 
             var variableNameToken = ValidateVariableNameToken(nodes[0].Token);
+            var typeToken = new TypeToken(variableNameToken.Type, variableNameToken.Line, variableNameToken.Column);
             ValidateOperatorToken(nodes[1].Token, OperatorCollection.Assignment);
-            var literalToken = ValidateLiteralToken(nodes[2].Token);
+            var literalToken = ValidateLiteralToken(nodes[2].Token, typeToken);
+
             ValidateSeparatorToken(nodes[3].Token, SeparatorCollection.EndStatement);
 
+            block.SetTypeToken(typeToken);
             block.SetVariableNameToken(variableNameToken);
             block.SetLiteralToken(literalToken);
-
-            var typeToken = new TypeToken(literalToken.Type, literalToken.Line, literalToken.Column);
-            block.SetTypeToken(typeToken);
         }
 
         private static KeywordToken ValidateKeywordToken(Token token, Keyword keyword)
@@ -83,6 +83,24 @@ namespace DistractScript.Core
             }
 
             return typeToken;
+        }
+
+        private static VariableName ValidateVariableNameToken(Token token, TypeToken typeToken)
+        {
+            if (!(token is VariableName variableName))
+            {
+                var actual = token.StringValue;
+                var expected = "variable name";
+                throw new SyntaxException(actual, expected, token.Line, token.Column);
+            }
+            else if (variableName.Type != typeToken.Type)
+            {
+                var expected = typeToken.Type.Name;
+                var actual = variableName.Type.Name;
+                throw new TypeException(expected, actual, token.Line, token.Column);
+            }
+
+            return variableName;
         }
 
         private static VariableName ValidateVariableNameToken(Token token)
@@ -146,18 +164,6 @@ namespace DistractScript.Core
                 var expected = typeToken.Type.Name;
                 var actual = literalToken.Type.Name;
                 throw new TypeException(expected, actual, token.Line, token.Column);
-            }
-
-            return literalToken;
-        }
-
-        private static LiteralToken ValidateLiteralToken(Token token)
-        {
-            if (!(token is LiteralToken literalToken))
-            {
-                var actual = token.StringValue;
-                var expected = $"value";
-                throw new SyntaxException(actual, expected, token.Line, token.Column);
             }
 
             return literalToken;
