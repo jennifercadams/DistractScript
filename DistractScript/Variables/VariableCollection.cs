@@ -22,10 +22,11 @@ namespace DistractScript.Variables
             Decimals = new List<Variable<decimal>>();
         }
 
-        public void AddEmpty(string name, Type type)
+        public void AddEmpty(VariableName nameToken, Type type)
         {
+            var name = nameToken.StringValue;
             if (VariableExists(name))
-                throw new VarAlreadyExistsException(name);
+                throw new VarAlreadyExistsException(name, nameToken.Line, nameToken.Column);
 
             if (type == typeof(string))
             {
@@ -51,10 +52,11 @@ namespace DistractScript.Variables
             VariableNames.Add(name);
         }
 
-        public void AddWithValue(string name, LiteralToken literalToken)
+        public void AddWithValue(VariableName nameToken, LiteralToken literalToken)
         {
+            var name = nameToken.StringValue;
             if (VariableExists(name))
-                throw new VarAlreadyExistsException(name);
+                throw new VarAlreadyExistsException(name, nameToken.Line, nameToken.Column);
 
             var type = literalToken.Type;
             if (type == typeof(string))
@@ -85,10 +87,11 @@ namespace DistractScript.Variables
             VariableNames.Add(name);
         }
 
-        public void AssignValue(string name, LiteralToken literalToken)
+        public void AssignValue(VariableName nameToken, LiteralToken literalToken)
         {
+            var name = nameToken.StringValue;
             if (!VariableExists(name))
-                throw new VarDoesNotExistException(name);
+                throw new VarDoesNotExistException(name, nameToken.Line, nameToken.Column);
 
             var type = literalToken.Type;
             if (type == typeof(string))

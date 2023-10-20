@@ -47,32 +47,32 @@ namespace DistractScript.Core
         private void EvaluateDeclareEmptyVar(BlockNode block)
         {
             var type = block.TypeToken.Type;
-            var name = block.VariableNameToken.StringValue;
-            GlobalVariables.AddEmpty(name, type);
+            var nameToken = block.VariableNameToken;
+            GlobalVariables.AddEmpty(nameToken, type);
         }
 
         private void EvaluateDeclareVarWithValue(BlockNode block)
         {
             var type = block.TypeToken.Type;
-            var name = block.VariableNameToken.StringValue;
+            var nameToken = block.VariableNameToken;
             var literalToken = block.LiteralToken;
             if (literalToken == null)
             {
                 literalToken = EvaluateExpression(block.ExpressionTokens, type);
             }
-            GlobalVariables.AddWithValue(name, literalToken);
+            GlobalVariables.AddWithValue(nameToken, literalToken);
         }
 
         private void EvaluateAssignVar(BlockNode block)
         {
             var type = block.TypeToken.Type;
-            var name = block.VariableNameToken.StringValue;
+            var nameToken = block.VariableNameToken;
             var literalToken = block.LiteralToken;
             if (literalToken == null)
             {
                 literalToken = EvaluateExpression(block.ExpressionTokens, type);
             }
-            GlobalVariables.AssignValue(name, literalToken);
+            GlobalVariables.AssignValue(nameToken, literalToken);
         }
 
         private LiteralToken EvaluateExpression(List<Token> expressionTokens, Type type)

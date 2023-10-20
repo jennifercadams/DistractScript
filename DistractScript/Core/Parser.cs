@@ -10,10 +10,12 @@ namespace DistractScript.Core
     public class Parser
     {
         public List<Token> Tokens { get; private set; }
+        public List<string> VariableNames { get; private set; }
 
         public Parser(List<Token> tokens)
         {
             Tokens = tokens;
+            VariableNames = new List<string>();
         }
 
         public ParseTree BuildParseTree()
@@ -105,14 +107,36 @@ namespace DistractScript.Core
             switch (block.Command)
             {
                 case Command.DeclareEmptyVar:
+                    ValidateNewVar(block.VariableNameToken);
                     Validator.ValidateDeclareEmptyVar(block);
                     break;
                 case Command.DeclareVarWithValue:
+                    ValidateNewVar(block.VariableNameToken);
                     Validator.ValidateDeclareVarWithValue(block);
                     break;
                 case Command.AssignVar:
                     Validator.ValidateAssignVar(block);
                     break;
+            }
+        }
+
+        private void ValidateNewVar(VariableName variableName)
+        {
+            if (VariableNames.Contains(variableName.StringValue))
+            {
+                throw new VarAlreadyExistsException(variableName.StringValue, variableName.Line, variableName.Column);
+            }
+            else
+            {
+                VariableNames.Add(variableName.StringValue);
+            }
+        }
+
+        private void ValidateExistingVar(VariableName variableName)
+        {
+            if (!VariableNames.Contains(variableName.StringValue))
+            {
+                throw new VarDoesNotExistException(variableName.StringValue, variableName.Line, variableName.Column);
             }
         }
     }
