@@ -180,7 +180,8 @@ namespace DistractScript.Core
                 {
                     if (nodes[i].Token is VariableName variableName)
                     {
-                        expressionTokens.Add(variableName);
+                        var variableNameToken = ValidateVariableNameToken(variableName, typeToken);
+                        expressionTokens.Add(variableNameToken);
                     }
                     else
                     {
