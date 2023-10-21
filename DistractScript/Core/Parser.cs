@@ -115,6 +115,7 @@ namespace DistractScript.Core
                     Validator.ValidateDeclareVarWithValue(block);
                     break;
                 case Command.AssignVar:
+                    ValidateExistingVar(block.VariableNameToken);
                     Validator.ValidateAssignVar(block);
                     break;
             }
