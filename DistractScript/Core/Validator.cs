@@ -35,6 +35,11 @@ namespace DistractScript.Core
                 var expressionTokens = ValidateExpression(expressionNode, typeToken);
                 block.SetExpressionTokens(expressionTokens);
             }
+            else if (nodes[4].Token is VariableName)
+            {
+                var nameToken = ValidateVariableNameToken(nodes[4].Token, typeToken);
+                block.SetExpressionTokens(new List<Token>() { nameToken });
+            }
             else
             {
                 var literalToken = ValidateLiteralToken(nodes[4].Token, typeToken);
@@ -57,6 +62,11 @@ namespace DistractScript.Core
             {
                 var expressionTokens = ValidateExpression(expressionNode, typeToken);
                 block.SetExpressionTokens(expressionTokens);
+            }
+            else if (nodes[2].Token is VariableName)
+            {
+                var nameToken = ValidateVariableNameToken(nodes[2].Token, typeToken);
+                block.SetExpressionTokens(new List<Token>() { nameToken });
             }
             else
             {
