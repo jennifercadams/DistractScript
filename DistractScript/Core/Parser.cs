@@ -107,16 +107,16 @@ namespace DistractScript.Core
             switch (block.Command)
             {
                 case Command.DeclareEmptyVar:
-                    ValidateNewVar(block.VariableNameToken);
                     Validator.ValidateDeclareEmptyVar(block);
+                    ValidateNewVar(block.VariableNameToken);
                     break;
                 case Command.DeclareVarWithValue:
-                    ValidateNewVar(block.VariableNameToken);
                     Validator.ValidateDeclareVarWithValue(block);
+                    ValidateNewVar(block.VariableNameToken);
                     break;
                 case Command.AssignVar:
-                    ValidateExistingVar(block.VariableNameToken);
                     Validator.ValidateAssignVar(block);
+                    ValidateExistingVar(block.VariableNameToken);
                     break;
             }
         }
