@@ -53,13 +53,20 @@ namespace DistractScript.Core
             var variableNameToken = ValidateVariableNameToken(nodes[0].Token);
             var typeToken = new TypeToken(variableNameToken.Type, variableNameToken.Line, variableNameToken.Column);
             ValidateOperatorToken(nodes[1].Token, OperatorCollection.Assignment);
-            var literalToken = ValidateLiteralToken(nodes[2].Token, typeToken);
-
+            if (nodes[2] is ExpressionNode expressionNode)
+            {
+                var expressionTokens = ValidateExpression(expressionNode, typeToken);
+                block.SetExpressionTokens(expressionTokens);
+            }
+            else
+            {
+                var literalToken = ValidateLiteralToken(nodes[2].Token, typeToken);
+                block.SetLiteralToken(literalToken);
+            }
             ValidateSeparatorToken(nodes[3].Token, SeparatorCollection.EndStatement);
 
             block.SetTypeToken(typeToken);
             block.SetVariableNameToken(variableNameToken);
-            block.SetLiteralToken(literalToken);
         }
 
         private static KeywordToken ValidateKeywordToken(Token token, Keyword keyword)
