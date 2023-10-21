@@ -77,22 +77,43 @@ namespace DistractScript.Core
 
         private LiteralToken EvaluateExpression(List<Token> expressionTokens, Type type)
         {
+            var tokens = ReplaceVariables(expressionTokens);
+
             if (type == typeof(string))
             {
-                return EvaluateStringConcatenation(expressionTokens);
+                return EvaluateStringConcatenation(tokens);
             }
             else if (type == typeof(int))
             {
-                return EvaluateIntegerExpression(expressionTokens);
+                return EvaluateIntegerExpression(tokens);
             }
             else if (type == typeof(decimal))
             {
-                return EvaluateDecimalExpression(expressionTokens);
+                return EvaluateDecimalExpression(tokens);
             }
             else
             {
                 return null;
             }
+        }
+
+        private List<Token> ReplaceVariables(List<Token> expressionTokens)
+        {
+            var convertedTokens = new List<Token>();
+            foreach (var token in expressionTokens)
+            {
+                if (token is VariableName nameToken)
+                {
+                    var literalToken = GlobalVariables.FindVariable(nameToken);
+                    convertedTokens.Add(literalToken);
+                }
+                else
+                {
+                    convertedTokens.Add(token);
+                }
+            }
+
+            return convertedTokens;
         }
 
         private StringLiteral EvaluateStringConcatenation(List<Token> expressionTokens)

@@ -12,5 +12,12 @@ namespace DistractScript.Tokens
             Type = typeof(int);
             Value = Convert.ToInt32(value);
         }
+
+        public IntegerLiteral(int value, int line, int column)
+            : base (value.ToString(), line, column)
+        {
+            Type = typeof(int);
+            Value = value;
+        }
     }
 }

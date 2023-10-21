@@ -120,6 +120,40 @@ namespace DistractScript.Variables
             }
         }
 
+        public LiteralToken FindVariable(VariableName nameToken)
+        {
+            var name = nameToken.StringValue;
+            var line = nameToken.Line;
+            var column = nameToken.Column;
+            if (!VariableExists(name))
+                throw new VarDoesNotExistException(name, line, column);
+
+            var type = nameToken.Type;
+            if (type == typeof(string))
+            {
+                var value = Strings.Find(v => v.Name == nameToken.StringValue).Get();
+                var stringValue = $"\"{value}\"";
+                return new StringLiteral(stringValue, line, column);
+            }
+            else if (type == typeof(bool))
+            {
+                var value = Booleans.Find(v => v.Name == nameToken.StringValue).Get();
+                return new BoolLiteral(value, line, column);
+            }
+            else if (type == typeof(int))
+            {
+                var value = Integers.Find(v => v.Name == nameToken.StringValue).Get();
+                return new IntegerLiteral(value, line, column);
+            }
+            else if (type == typeof(decimal))
+            {
+                var value = Decimals.Find(v => v.Name == nameToken.StringValue).Get();
+                return new DecimalLiteral(value, line, column);
+            }
+
+            return null;
+        }
+
         private bool VariableExists(string name)
         {
             return VariableNames.Contains(name);
