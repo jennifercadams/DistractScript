@@ -95,9 +95,9 @@ namespace DistractScript.Core
             }
             else if (variableName.Type != typeToken.Type)
             {
-                var expected = typeToken.Type.Name;
-                var actual = variableName.Type.Name;
-                throw new TypeException(expected, actual, token.Line, token.Column);
+                var actual = variableName.Type;
+                var expected = typeToken.Type;
+                throw new TypeException(actual, expected, token.Line, token.Column);
             }
 
             return variableName;
@@ -161,9 +161,9 @@ namespace DistractScript.Core
             }
             else if (literalToken.Type != typeToken.Type)
             {
-                var expected = typeToken.Type.Name;
-                var actual = literalToken.Type.Name;
-                throw new TypeException(expected, actual, token.Line, token.Column);
+                var actual = literalToken.Type;
+                var expected = typeToken.Type;
+                throw new TypeException(actual, expected, token.Line, token.Column);
             }
 
             return literalToken;
