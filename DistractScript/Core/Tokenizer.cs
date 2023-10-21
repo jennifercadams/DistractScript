@@ -37,7 +37,7 @@ namespace DistractScript.Core
                 {
                     token = new StringLiteral(tokenString, line, column);
                 }
-                else if (tokenString == "true" || tokenString == "false")
+                else if (tokenString == LiteralCollection.True || tokenString == LiteralCollection.False)
                 {
                     token = new BoolLiteral(tokenString, line, column);
                 }

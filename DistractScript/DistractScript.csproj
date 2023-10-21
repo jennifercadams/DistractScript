@@ -71,6 +71,7 @@
     <Compile Include="Tokens\SeparatorToken.cs" />
     <Compile Include="Tokens\StringLiteral.cs" />
     <Compile Include="Tokens\Token.cs" />
+    <Compile Include="Tokens\TokenCollections\LiteralCollection.cs" />
     <Compile Include="Tokens\TypeToken.cs" />
     <Compile Include="Tokens\VariableName.cs" />
     <Compile Include="Tokens\TokenCollections\KeywordCollection.cs" />
