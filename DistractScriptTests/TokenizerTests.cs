@@ -133,6 +133,26 @@ namespace DistractScriptTests
             Assert.AreEqual(type, boolLiteral.Type);
         }
 
+        [TestMethod]
+        [DataRow("1", 1)]
+        [DataRow("0", 0)]
+        [DataRow("-1", -1)]
+        [DataRow("42", 42)]
+        public void GenerateTokens_Literal_Integer(string stringValue, int value)
+        {
+            var type = typeof(int);
+
+            var tokens = Tokenizer.GenerateTokens(stringValue);
+
+            Assert.IsTrue(tokens.Count == 1);
+            Assert.IsTrue(tokens[0] is IntegerLiteral);
+
+            var integerLiteral = tokens[0] as IntegerLiteral;
+            Assert.AreEqual(stringValue, integerLiteral.StringValue);
+            Assert.AreEqual(value, integerLiteral.Value);
+            Assert.AreEqual(type, integerLiteral.Type);
+        }
+
         private void VerifyKeywordToken(string stringValue, Keyword keyword)
         {
             var tokens = Tokenizer.GenerateTokens(stringValue);
