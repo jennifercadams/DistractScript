@@ -140,14 +140,12 @@ namespace DistractScript.Core
 
         private static bool IsInteger(string stringValue)
         {
-            var integerPattern = @"^\d+$";
-            return Regex.IsMatch(stringValue, integerPattern);
+            return int.TryParse(stringValue, out _);
         }
 
         private static bool IsDecimal(string stringValue)
         {
-            var decimalPattern = @"^\d+\.\d+$";
-            return Regex.IsMatch(stringValue, decimalPattern);
+            return decimal.TryParse(stringValue, out _);
         }
     }
 }
