@@ -46,6 +46,7 @@
     <Compile Include="Core\Evaluator.cs" />
     <Compile Include="Core\Interpreter.cs" />
     <Compile Include="Core\Parser.cs" />
+    <Compile Include="Core\Start.cs" />
     <Compile Include="Core\Tokenizer.cs" />
     <Compile Include="Core\Validator.cs" />
     <Compile Include="Data\BlockNode.cs" />

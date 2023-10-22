@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Diagnostics;
 using System.IO;
 using System.Reflection;
 using System.Text.RegularExpressions;
@@ -9,24 +8,17 @@ namespace DistractScript.Core
 {
     public static class Interpreter
     {
-        public static void Main(string[] args)
+        public static void Process(string[] args)
         {
-            try
-            {
-                var fileName = ParseArgs(args);
-                var text = GetFileText(fileName);
-                var tokens = Tokenizer.GenerateTokens(text);
+            var fileName = ParseArgs(args);
+            var text = GetFileText(fileName);
+            var tokens = Tokenizer.GenerateTokens(text);
 
-                var parser = new Parser(tokens);
-                var parseTree = parser.BuildParseTree();
+            var parser = new Parser(tokens);
+            var parseTree = parser.BuildParseTree();
 
-                var evaluator = new Evaluator(parseTree);
-                evaluator.Process();
-            }
-            catch (Exception exception)
-            {
-                HandleException(exception);
-            }
+            var evaluator = new Evaluator(parseTree);
+            evaluator.Process();
         }
 
         private static string ParseArgs(string[] args)
@@ -61,12 +53,6 @@ namespace DistractScript.Core
             }
 
             return File.ReadAllText(filePath);
-        }
-
-        private static void HandleException(Exception exception)
-        {
-            Console.WriteLine(exception.Message);
-            Debug.WriteLine(exception.ToString());
         }
     }
 }
