@@ -115,6 +115,24 @@ namespace DistractScriptTests
             Assert.AreEqual(type, stringLiteral.Type);
         }
 
+        [TestMethod]
+        [DataRow("true", true)]
+        [DataRow("false", false)]
+        public void GenerateTokens_Literal_Boolean(string stringValue, bool value)
+        {
+            var type = typeof(bool);
+
+            var tokens = Tokenizer.GenerateTokens(stringValue);
+
+            Assert.IsTrue(tokens.Count == 1);
+            Assert.IsTrue(tokens[0] is BoolLiteral);
+
+            var boolLiteral = tokens[0] as BoolLiteral;
+            Assert.AreEqual(stringValue, boolLiteral.StringValue);
+            Assert.AreEqual(value, boolLiteral.Value);
+            Assert.AreEqual(type, boolLiteral.Type);
+        }
+
         private void VerifyKeywordToken(string stringValue, Keyword keyword)
         {
             var tokens = Tokenizer.GenerateTokens(stringValue);
