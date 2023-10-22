@@ -97,6 +97,24 @@ namespace DistractScriptTests
             VerifyTypeToken(stringValue, type);
         }
 
+        [TestMethod]
+        public void GenerateTokens_Literal_String()
+        {
+            var stringValue = "\"Here's a test string!\"";
+            var value = "Here's a test string!";
+            var type = typeof(string);
+
+            var tokens = Tokenizer.GenerateTokens(stringValue);
+
+            Assert.IsTrue(tokens.Count == 1);
+            Assert.IsTrue(tokens[0] is StringLiteral);
+
+            var stringLiteral = tokens[0] as StringLiteral;
+            Assert.AreEqual(stringValue, stringLiteral.StringValue);
+            Assert.AreEqual(value, stringLiteral.Value);
+            Assert.AreEqual(type, stringLiteral.Type);
+        }
+
         private void VerifyKeywordToken(string stringValue, Keyword keyword)
         {
             var tokens = Tokenizer.GenerateTokens(stringValue);
