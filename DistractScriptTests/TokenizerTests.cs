@@ -105,8 +105,8 @@ namespace DistractScriptTests
             Assert.IsTrue(tokens[0] is KeywordToken);
 
             var keywordToken = tokens[0] as KeywordToken;
-            Assert.IsTrue(keywordToken.StringValue == stringValue);
-            Assert.IsTrue(keywordToken.Keyword == keyword);
+            Assert.AreEqual(stringValue, keywordToken.StringValue);
+            Assert.AreEqual(keyword, keywordToken.Keyword);
         }
 
         private void VerifyOperatorToken(string stringValue, Operator operatorType)
@@ -117,8 +117,8 @@ namespace DistractScriptTests
             Assert.IsTrue(tokens[0] is OperatorToken);
 
             var operatorToken = tokens[0] as OperatorToken;
-            Assert.IsTrue(operatorToken.StringValue == stringValue);
-            Assert.IsTrue(operatorToken.Operator == operatorType);
+            Assert.AreEqual(stringValue, operatorToken.StringValue);
+            Assert.AreEqual(operatorType, operatorToken.Operator);
         }
 
         private void VerifyTypeToken(string stringValue, Type type)
@@ -129,8 +129,8 @@ namespace DistractScriptTests
             Assert.IsTrue(tokens[0] is TypeToken);
 
             var typeToken = tokens[0] as TypeToken;
-            Assert.IsTrue(typeToken.StringValue == stringValue);
-            Assert.IsTrue(typeToken.Type == type);
+            Assert.AreEqual(stringValue, typeToken.StringValue);
+            Assert.AreEqual(type, typeToken.Type);
         }
     }
 }
