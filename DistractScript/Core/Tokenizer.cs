@@ -124,6 +124,11 @@ namespace DistractScript.Core
                     }
                     token = c.ToString();
                 }
+                else if (i == text.Length - 1)
+                {
+                    token += c;
+                    splitText.Add(token);
+                }
                 else
                 {
                     token += c;
