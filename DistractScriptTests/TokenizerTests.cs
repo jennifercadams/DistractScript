@@ -116,8 +116,8 @@ namespace DistractScriptTests
         }
 
         [TestMethod]
-        [DataRow("true", true)]
-        [DataRow("false", false)]
+        [DataRow(LiteralCollection.True, true)]
+        [DataRow(LiteralCollection.False, false)]
         public void GenerateTokens_Literal_Boolean(string stringValue, bool value)
         {
             var type = typeof(bool);
