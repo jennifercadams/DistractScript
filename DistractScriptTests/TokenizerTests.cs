@@ -177,6 +177,13 @@ namespace DistractScriptTests
             Assert.AreEqual(type, decimalLiteral.Type);
         }
 
+        [TestMethod]
+        public void GenerateTokens_Separator_EndStatement()
+        {
+            var stringValue = SeparatorCollection.EndStatement;
+            VerifySeparatorToken(stringValue);
+        }
+
         private void VerifyKeywordToken(string stringValue, Keyword keyword)
         {
             var tokens = Tokenizer.GenerateTokens(stringValue);
@@ -211,6 +218,17 @@ namespace DistractScriptTests
             var typeToken = tokens[0] as TypeToken;
             Assert.AreEqual(stringValue, typeToken.StringValue);
             Assert.AreEqual(type, typeToken.Type);
+        }
+
+        private void VerifySeparatorToken(string stringValue)
+        {
+            var tokens = Tokenizer.GenerateTokens(stringValue);
+
+            Assert.IsTrue(tokens.Count == 1);
+            Assert.IsTrue(tokens[0] is SeparatorToken);
+
+            var separatorToken = tokens[0] as SeparatorToken;
+            Assert.AreEqual(stringValue, separatorToken.StringValue);
         }
     }
 }
