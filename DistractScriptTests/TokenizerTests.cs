@@ -65,6 +65,38 @@ namespace DistractScriptTests
             VerifyOperatorToken(stringValue, operatorType);
         }
 
+        [TestMethod]
+        public void GenerateTokens_Type_String()
+        {
+            var stringValue = TypeCollection.StringType;
+            var type = typeof(string);
+            VerifyTypeToken(stringValue, type);
+        }
+
+        [TestMethod]
+        public void GenerateTokens_Type_Boolean()
+        {
+            var stringValue = TypeCollection.BoolType;
+            var type = typeof(bool);
+            VerifyTypeToken(stringValue, type);
+        }
+
+        [TestMethod]
+        public void GenerateTokens_Type_Integer()
+        {
+            var stringValue = TypeCollection.IntType;
+            var type = typeof(int);
+            VerifyTypeToken(stringValue, type);
+        }
+
+        [TestMethod]
+        public void GenerateTokens_Type_Decimal()
+        {
+            var stringValue = TypeCollection.DecimalType;
+            var type = typeof(decimal);
+            VerifyTypeToken(stringValue, type);
+        }
+
         private void VerifyKeywordToken(string stringValue, Keyword keyword)
         {
             var tokens = Tokenizer.GenerateTokens(stringValue);
@@ -89,5 +121,16 @@ namespace DistractScriptTests
             Assert.IsTrue(operatorToken.Operator == operatorType);
         }
 
+        private void VerifyTypeToken(string stringValue, Type type)
+        {
+            var tokens = Tokenizer.GenerateTokens(stringValue);
+
+            Assert.IsTrue(tokens.Count == 1);
+            Assert.IsTrue(tokens[0] is TypeToken);
+
+            var typeToken = tokens[0] as TypeToken;
+            Assert.IsTrue(typeToken.StringValue == stringValue);
+            Assert.IsTrue(typeToken.Type == type);
+        }
     }
 }
