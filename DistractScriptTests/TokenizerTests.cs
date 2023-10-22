@@ -153,6 +153,30 @@ namespace DistractScriptTests
             Assert.AreEqual(type, integerLiteral.Type);
         }
 
+        [TestMethod]
+        [DataRow("3.14159", 3.14159)]
+        [DataRow("1.0", 1.0)]
+        [DataRow("0.0", 0.0)]
+        [DataRow("-1.0", -1.0)]
+        [DataRow("-1.61803", -1.61803)]
+        [DataRow("10.0", 10.0)]
+        [DataRow("400.5", 400.5)]
+        public void GenerateTokens_Literal_Decimal(string stringValue, double doubleValue)
+        {
+            var value = Convert.ToDecimal(doubleValue);
+            var type = typeof(decimal);
+
+            var tokens = Tokenizer.GenerateTokens(stringValue);
+
+            Assert.IsTrue(tokens.Count == 1);
+            Assert.IsTrue(tokens[0] is DecimalLiteral);
+
+            var decimalLiteral = tokens[0] as DecimalLiteral;
+            Assert.AreEqual(stringValue, decimalLiteral.StringValue);
+            Assert.AreEqual(value, decimalLiteral.Value);
+            Assert.AreEqual(type, decimalLiteral.Type);
+        }
+
         private void VerifyKeywordToken(string stringValue, Keyword keyword)
         {
             var tokens = Tokenizer.GenerateTokens(stringValue);
