@@ -31,16 +31,15 @@ namespace DistractScript.Core
 
             for (var i = 0; i < SplitText.Count; i++)
             {
+                var substring = SplitText[i];
                 var tokenString = SplitText[i].Trim();
 
                 Token token;
                 if (tokenString.Length == 0)
                 {
-                    if (SplitText[i].Contains("\n"))
+                    if (substring.Contains("\n"))
                     {
-                        var newLines = SplitText[i].Count(c => c == '\n');
-                        Column = 1;
-                        Line += newLines;
+                        HandleNewLine(substring);
                     }
                     continue;
                 }
@@ -78,34 +77,14 @@ namespace DistractScript.Core
                 }
                 else
                 {
-                    var prevToken = Tokens[Tokens.Count - 1];
-                    Type type;
-                    if (prevToken is TypeToken typeToken)
-                    {
-                        type = typeToken.Type;
-                        if (Variables.ContainsKey(tokenString))
-                        {
-                            Variables[tokenString] = type;
-                        }
-                        else
-                        {
-                            Variables.Add(tokenString, type);
-                        }
-                    }
-                    else
-                    {
-                        type = Variables[tokenString];
-                    }
-                    token = new VariableName(tokenString, type, Line, Column);
+                    token = CreateVariableNameToken(tokenString);
                 }
                 Tokens.Add(token);
 
-                Column += SplitText[i].Length;
-                if (SplitText[i].Contains("\n"))
+                Column += substring.Length;
+                if (substring.Contains("\n"))
                 {
-                    var newLines = SplitText[i].Count(c => c == '\n');
-                    Column = 0;
-                    Line += newLines;
+                    HandleNewLine(substring);
                 }
             }
 
@@ -156,6 +135,13 @@ namespace DistractScript.Core
             return splitText;
         }
 
+        private void HandleNewLine(string substring)
+        {
+            var newLines = substring.Count(c => c == '\n');
+            Column = 1;
+            Line += newLines;
+        }
+
         private bool IsInteger(string stringValue)
         {
             return int.TryParse(stringValue, out _);
@@ -164,6 +150,29 @@ namespace DistractScript.Core
         private bool IsDecimal(string stringValue)
         {
             return decimal.TryParse(stringValue, out _);
+        }
+
+        private VariableName CreateVariableNameToken(string tokenString)
+        {
+            var prevToken = Tokens[Tokens.Count - 1];
+            Type type;
+            if (prevToken is TypeToken typeToken)
+            {
+                type = typeToken.Type;
+                if (Variables.ContainsKey(tokenString))
+                {
+                    Variables[tokenString] = type;
+                }
+                else
+                {
+                    Variables.Add(tokenString, type);
+                }
+            }
+            else
+            {
+                type = Variables[tokenString];
+            }
+            return new VariableName(tokenString, type, Line, Column);
         }
     }
 }
