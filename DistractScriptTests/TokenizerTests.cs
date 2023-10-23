@@ -9,6 +9,8 @@ namespace DistractScriptTests
     [TestClass]
     public class TokenizerTests
     {
+        private const string TestDeclareString = "forget infodump bestGirl = \"Wednesday\";";
+
         [TestMethod]
         public void GenerateTokens_Keyword_DeclareVar()
         {
@@ -182,6 +184,73 @@ namespace DistractScriptTests
         {
             var stringValue = SeparatorCollection.EndStatement;
             VerifySeparatorToken(stringValue);
+        }
+
+        [TestMethod]
+        [DataRow(2)]
+        [DataRow(3)]
+        [DataRow(10)]
+        public void GenerateTokens_WhiteSpace_MultiLineBreak(int lineBreaks)
+        {
+            var text = TestDeclareString + new string('\n', lineBreaks) + TestDeclareString;
+
+            var tokens = Tokenizer.GenerateTokens(text);
+
+            Assert.IsTrue(tokens.Count == 12);
+
+            var tokensLine1 = tokens.GetRange(0, 6);
+            foreach (var token in tokensLine1)
+            {
+                var lineNumber = 1;
+                Assert.AreEqual(lineNumber, token.Line);
+            }
+
+            var tokensLineN = tokens.GetRange(6, 6);
+            foreach (var token in tokensLineN)
+            {
+                var lineNumber = 1 + lineBreaks;
+                Assert.AreEqual(lineNumber, token.Line);
+            }
+
+        }
+
+        [TestMethod]
+        [DataRow(1)]
+        [DataRow(2)]
+        [DataRow(3)]
+        [DataRow(10)]
+        public void GenerateTokens_WhiteSpace_LeadingLineBreaks(int lineBreaks)
+        {
+            var text = new string('\n', lineBreaks) + TestDeclareString;
+            var lineNumber = lineBreaks + 1;
+
+            var tokens = Tokenizer.GenerateTokens(text);
+
+            Assert.IsTrue(tokens.Count == 6);
+
+            foreach (var token in tokens)
+            {
+                Assert.AreEqual(lineNumber, token.Line);
+            }
+        }
+
+        [TestMethod]
+        [DataRow(1)]
+        [DataRow(2)]
+        [DataRow(3)]
+        [DataRow(10)]
+        public void GenerateTokens_WhiteSpace_TrailingLineBreaks(int lineBreaks)
+        {
+            var text = TestDeclareString + new string('\n', lineBreaks);
+
+            var tokens = Tokenizer.GenerateTokens(text);
+
+            Assert.IsTrue(tokens.Count == 6);
+
+            foreach (var token in tokens)
+            {
+                Assert.AreEqual(1, token.Line);
+            }
         }
 
         private void VerifyKeywordToken(string stringValue, Keyword keyword)
