@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using DistractScript.Tokens;
 using DistractScript.Tokens.TokenCollections;
 
@@ -20,6 +21,16 @@ namespace DistractScript.Core
                 var tokenString = splitText[i].Trim();
 
                 Token token;
+                if (tokenString.Length == 0)
+                {
+                    if (splitText[i].Contains("\n"))
+                    {
+                        var newLines = splitText[i].Count(c => c == '\n');
+                        column = 0;
+                        line += newLines;
+                    }
+                    continue;
+                }
                 if (KeywordCollection.Contains(tokenString))
                 {
                     token = new KeywordToken(tokenString, line, column);
@@ -79,8 +90,9 @@ namespace DistractScript.Core
                 column += splitText[i].Length;
                 if (splitText[i].Contains("\n"))
                 {
+                    var newLines = splitText[i].Count(c => c == '\n');
                     column = 0;
-                    line++;
+                    line += newLines;
                 }
             }
 
@@ -95,13 +107,7 @@ namespace DistractScript.Core
             for (var i = 0; i < text.Length; i++)
             {
                 char c = text[i];
-                if (c == '\n')
-                {
-                    token += c;
-                    splitText.Add(token);
-                    token = "";
-                }
-                else if (char.IsWhiteSpace(c) && (i == text.Length - 1 || !char.IsWhiteSpace(text[i + 1])))
+                if (char.IsWhiteSpace(c) && (i == text.Length - 1 || !char.IsWhiteSpace(text[i + 1])))
                 {
                     token += c;
                     splitText.Add(token);
