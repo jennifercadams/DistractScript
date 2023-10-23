@@ -106,7 +106,8 @@ namespace DistractScriptTests
             var value = "Here's a test string!";
             var type = typeof(string);
 
-            var tokens = Tokenizer.GenerateTokens(stringValue);
+            var tokenizer = new Tokenizer(stringValue);
+            var tokens = tokenizer.GenerateTokens();
 
             Assert.IsTrue(tokens.Count == 1);
             Assert.IsTrue(tokens[0] is StringLiteral);
@@ -124,7 +125,8 @@ namespace DistractScriptTests
         {
             var type = typeof(bool);
 
-            var tokens = Tokenizer.GenerateTokens(stringValue);
+            var tokenizer = new Tokenizer(stringValue);
+            var tokens = tokenizer.GenerateTokens();
 
             Assert.IsTrue(tokens.Count == 1);
             Assert.IsTrue(tokens[0] is BoolLiteral);
@@ -144,7 +146,8 @@ namespace DistractScriptTests
         {
             var type = typeof(int);
 
-            var tokens = Tokenizer.GenerateTokens(stringValue);
+            var tokenizer = new Tokenizer(stringValue);
+            var tokens = tokenizer.GenerateTokens();
 
             Assert.IsTrue(tokens.Count == 1);
             Assert.IsTrue(tokens[0] is IntegerLiteral);
@@ -168,7 +171,8 @@ namespace DistractScriptTests
             var value = Convert.ToDecimal(doubleValue);
             var type = typeof(decimal);
 
-            var tokens = Tokenizer.GenerateTokens(stringValue);
+            var tokenizer = new Tokenizer(stringValue);
+            var tokens = tokenizer.GenerateTokens();
 
             Assert.IsTrue(tokens.Count == 1);
             Assert.IsTrue(tokens[0] is DecimalLiteral);
@@ -194,7 +198,8 @@ namespace DistractScriptTests
         {
             var text = TestDeclareString + new string('\n', lineBreaks) + TestDeclareString;
 
-            var tokens = Tokenizer.GenerateTokens(text);
+            var tokenizer = new Tokenizer(text);
+            var tokens = tokenizer.GenerateTokens();
 
             Assert.IsTrue(tokens.Count == 12);
 
@@ -224,7 +229,8 @@ namespace DistractScriptTests
             var text = new string('\n', lineBreaks) + TestDeclareString;
             var lineNumber = lineBreaks + 1;
 
-            var tokens = Tokenizer.GenerateTokens(text);
+            var tokenizer = new Tokenizer(text);
+            var tokens = tokenizer.GenerateTokens();
 
             Assert.IsTrue(tokens.Count == 6);
 
@@ -243,7 +249,8 @@ namespace DistractScriptTests
         {
             var text = TestDeclareString + new string('\n', lineBreaks);
 
-            var tokens = Tokenizer.GenerateTokens(text);
+            var tokenizer = new Tokenizer(text);
+            var tokens = tokenizer.GenerateTokens();
 
             Assert.IsTrue(tokens.Count == 6);
 
@@ -255,7 +262,8 @@ namespace DistractScriptTests
 
         private void VerifyKeywordToken(string stringValue, Keyword keyword)
         {
-            var tokens = Tokenizer.GenerateTokens(stringValue);
+            var tokenizer = new Tokenizer(stringValue);
+            var tokens = tokenizer.GenerateTokens();
 
             Assert.IsTrue(tokens.Count == 1);
             Assert.IsTrue(tokens[0] is KeywordToken);
@@ -267,7 +275,8 @@ namespace DistractScriptTests
 
         private void VerifyOperatorToken(string stringValue, Operator operatorType)
         {
-            var tokens = Tokenizer.GenerateTokens(stringValue);
+            var tokenizer = new Tokenizer(stringValue);
+            var tokens = tokenizer.GenerateTokens();
 
             Assert.IsTrue(tokens.Count == 1);
             Assert.IsTrue(tokens[0] is OperatorToken);
@@ -279,7 +288,8 @@ namespace DistractScriptTests
 
         private void VerifyTypeToken(string stringValue, Type type)
         {
-            var tokens = Tokenizer.GenerateTokens(stringValue);
+            var tokenizer = new Tokenizer(stringValue);
+            var tokens = tokenizer.GenerateTokens();
 
             Assert.IsTrue(tokens.Count == 1);
             Assert.IsTrue(tokens[0] is TypeToken);
@@ -291,7 +301,8 @@ namespace DistractScriptTests
 
         private void VerifySeparatorToken(string stringValue)
         {
-            var tokens = Tokenizer.GenerateTokens(stringValue);
+            var tokenizer = new Tokenizer(stringValue);
+            var tokens = tokenizer.GenerateTokens();
 
             Assert.IsTrue(tokens.Count == 1);
             Assert.IsTrue(tokens[0] is SeparatorToken);

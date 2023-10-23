@@ -6,100 +6,113 @@ using DistractScript.Tokens.TokenCollections;
 
 namespace DistractScript.Core
 {
-    public static class Tokenizer
+    public class Tokenizer
     {
-        public static List<Token> GenerateTokens(string text)
-        {
-            var splitText = Split(text);
-            var tokens = new List<Token>();
-            var variables = new Dictionary<string, Type>();
-            var line = 1;
-            var column = 0;
+        private string Text { get; set; }
+        private List<string> SplitText { get; set; }
+        private List<Token> Tokens { get; set; }
+        private Dictionary<string, Type> Variables { get; set; }
+        private int Line { get; set; }
+        private int Column { get; set; }
 
-            for (var i = 0; i < splitText.Count; i++)
+        public Tokenizer(string text)
+        {
+            Text = text;
+            SplitText = new List<string>();
+            Tokens = new List<Token>();
+            Variables = new Dictionary<string, Type>();
+            Line = 1;
+            Column = 1;
+        }
+
+        public List<Token> GenerateTokens()
+        {
+            SplitText = Split(Text);
+
+            for (var i = 0; i < SplitText.Count; i++)
             {
-                var tokenString = splitText[i].Trim();
+                var tokenString = SplitText[i].Trim();
 
                 Token token;
                 if (tokenString.Length == 0)
                 {
-                    if (splitText[i].Contains("\n"))
+                    if (SplitText[i].Contains("\n"))
                     {
-                        var newLines = splitText[i].Count(c => c == '\n');
-                        column = 0;
-                        line += newLines;
+                        var newLines = SplitText[i].Count(c => c == '\n');
+                        Column = 1;
+                        Line += newLines;
                     }
                     continue;
                 }
                 if (KeywordCollection.Contains(tokenString))
                 {
-                    token = new KeywordToken(tokenString, line, column);
+                    token = new KeywordToken(tokenString, Line, Column);
                 }
                 else if (OperatorCollection.Contains(tokenString))
                 {
-                    token = new OperatorToken(tokenString, line, column);
+                    token = new OperatorToken(tokenString, Line, Column);
                 }
                 else if (TypeCollection.Contains(tokenString))
                 {
-                    token = new TypeToken(tokenString, line, column);
+                    token = new TypeToken(tokenString, Line, Column);
                 }
                 else if (tokenString[0] == '"')
                 {
-                    token = new StringLiteral(tokenString, line, column);
+                    token = new StringLiteral(tokenString, Line, Column);
                 }
                 else if (tokenString == LiteralCollection.True || tokenString == LiteralCollection.False)
                 {
-                    token = new BoolLiteral(tokenString, line, column);
+                    token = new BoolLiteral(tokenString, Line, Column);
                 }
                 else if (IsInteger(tokenString))
                 {
-                    token = new IntegerLiteral(tokenString, line, column);
+                    token = new IntegerLiteral(tokenString, Line, Column);
                 }
                 else if (IsDecimal(tokenString))
                 {
-                    token = new DecimalLiteral(tokenString, line, column);
+                    token = new DecimalLiteral(tokenString, Line, Column);
                 }
                 else if (tokenString == SeparatorCollection.EndStatement)
                 {
-                    token = new SeparatorToken(tokenString, line, column);
+                    token = new SeparatorToken(tokenString, Line, Column);
                 }
                 else
                 {
-                    var prevToken = tokens[tokens.Count - 1];
+                    var prevToken = Tokens[Tokens.Count - 1];
                     Type type;
                     if (prevToken is TypeToken typeToken)
                     {
                         type = typeToken.Type;
-                        if (variables.ContainsKey(tokenString))
+                        if (Variables.ContainsKey(tokenString))
                         {
-                            variables[tokenString] = type;
+                            Variables[tokenString] = type;
                         }
                         else
                         {
-                            variables.Add(tokenString, type);
+                            Variables.Add(tokenString, type);
                         }
                     }
                     else
                     {
-                        type = variables[tokenString];
+                        type = Variables[tokenString];
                     }
-                    token = new VariableName(tokenString, type, line, column);
+                    token = new VariableName(tokenString, type, Line, Column);
                 }
-                tokens.Add(token);
+                Tokens.Add(token);
 
-                column += splitText[i].Length;
-                if (splitText[i].Contains("\n"))
+                Column += SplitText[i].Length;
+                if (SplitText[i].Contains("\n"))
                 {
-                    var newLines = splitText[i].Count(c => c == '\n');
-                    column = 0;
-                    line += newLines;
+                    var newLines = SplitText[i].Count(c => c == '\n');
+                    Column = 0;
+                    Line += newLines;
                 }
             }
 
-            return tokens;
+            return Tokens;
         }
 
-        private static List<string> Split(string text)
+        private List<string> Split(string text)
         {
             var splitText = new List<string>();
 
@@ -143,12 +156,12 @@ namespace DistractScript.Core
             return splitText;
         }
 
-        private static bool IsInteger(string stringValue)
+        private bool IsInteger(string stringValue)
         {
             return int.TryParse(stringValue, out _);
         }
 
-        private static bool IsDecimal(string stringValue)
+        private bool IsDecimal(string stringValue)
         {
             return decimal.TryParse(stringValue, out _);
         }

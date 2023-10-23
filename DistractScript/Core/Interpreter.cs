@@ -12,7 +12,9 @@ namespace DistractScript.Core
         {
             var fileName = ParseArgs(args);
             var text = GetFileText(fileName);
-            var tokens = Tokenizer.GenerateTokens(text);
+
+            var tokenizer = new Tokenizer(text);
+            var tokens = tokenizer.GenerateTokens();
 
             var parser = new Parser(tokens);
             var parseTree = parser.BuildParseTree();
