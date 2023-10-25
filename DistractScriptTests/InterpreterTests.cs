@@ -13,7 +13,7 @@ namespace DistractScriptTests
         public void Process_EmptyArguments()
         {
             var arguments = Array.Empty<string>();
-            Action action = () => Interpreter.Process(arguments);
+            void action() => Interpreter.Process(arguments);
 
             Assert.ThrowsException<MissingFileNameException>(action);
         }
@@ -25,7 +25,7 @@ namespace DistractScriptTests
         [DataRow(new string[] { "test1", "test2", "test3" })]
         public void Process_MultipleArguments(string[] arguments)
         {
-            Action action = () => Interpreter.Process(arguments);
+            void action() => Interpreter.Process(arguments);
 
             Assert.ThrowsException<TooManyArgumentsException>(action);
         }
@@ -38,7 +38,7 @@ namespace DistractScriptTests
         public void Process_InvalidFileName(string fileName)
         {
             var arguments = new string[] { fileName };
-            Action action = () => Interpreter.Process(arguments);
+            void action() => Interpreter.Process(arguments);
 
             Assert.ThrowsException<FileFormatException>(action);
         }
@@ -47,7 +47,7 @@ namespace DistractScriptTests
         public void Process_ValidFileName_FileDoesNotExist()
         {
             var arguments = new string[] { "doesnotexist.adhd" };
-            Action action = () => Interpreter.Process(arguments);
+            void action() => Interpreter.Process(arguments);
 
             Assert.ThrowsException<FileNotFoundException>(action);
         }
