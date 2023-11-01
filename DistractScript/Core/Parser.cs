@@ -40,6 +40,7 @@ namespace DistractScript.Core
                 var token = Tokens[0];
 
                 if ((token is LiteralToken || token is VariableName) 
+                    && Tokens.Count > 1
                     && Tokens[1] is OperatorToken operatorToken 
                     && operatorToken.Operator != Operator.Assignment)
                 {
